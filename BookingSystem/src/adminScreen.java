@@ -206,7 +206,7 @@ public class adminScreen extends javax.swing.JFrame {
             }
         });
 
-        btnLoginScreen.setText("Back to login");
+        btnLoginScreen.setText("Back to menu");
         btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginScreenActionPerformed(evt);
