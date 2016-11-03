@@ -71,6 +71,11 @@ public class mainMenu extends javax.swing.JFrame {
         });
 
         btnRoomScreen.setText("View rooms");
+        btnRoomScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRoomScreenActionPerformed(evt);
+            }
+        });
 
         btnLogOut.setText("Log out");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +150,13 @@ public class mainMenu extends javax.swing.JFrame {
          this.dispose();
 
     }//GEN-LAST:event_btnLogOutActionPerformed
+
+    private void btnRoomScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoomScreenActionPerformed
+       
+        new roomScreen().setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnRoomScreenActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
