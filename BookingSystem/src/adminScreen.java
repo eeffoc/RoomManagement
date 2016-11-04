@@ -35,7 +35,7 @@ public class adminScreen extends javax.swing.JFrame {
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
         userID = tempID;
-
+        
         initComponents();
         DoConnect();
     
@@ -58,8 +58,7 @@ public class adminScreen extends javax.swing.JFrame {
                 int id_col = rs.getInt("ID");
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
-                String job = rs.getString("job_title");
-                authorisation = rs.getString("edit_authorisation");
+                String setAuthorisation = rs.getString("edit_authorisation");
                 
                 System.out.println(rs.getString("edit_authorisation"));
 
@@ -68,7 +67,7 @@ public class adminScreen extends javax.swing.JFrame {
                 textID.setText(id);
                 textFirstName.setText(first_name);
                 textLastName.setText(last_name);
-                textJobTitle.setText(job);
+                textAuthorisation.setText(setAuthorisation);
 
                 boolID = true;
             }
@@ -85,7 +84,7 @@ public class adminScreen extends javax.swing.JFrame {
         curRow = rs.getRow();
         textFirstName.setText("");
         textLastName.setText("");
-        textJobTitle.setText("");
+        textAuthorisation.setText("");
     }
 
     /**
@@ -101,8 +100,6 @@ public class adminScreen extends javax.swing.JFrame {
         textFirstName = new javax.swing.JTextField();
         textID = new javax.swing.JTextField();
         textLastName = new javax.swing.JTextField();
-        textJobTitle = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         btnFirst = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
@@ -115,6 +112,8 @@ public class adminScreen extends javax.swing.JFrame {
         btnLoginScreen = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
         jPassword = new javax.swing.JPasswordField();
+        lblPassword1 = new javax.swing.JLabel();
+        textAuthorisation = new javax.swing.JTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -132,14 +131,6 @@ public class adminScreen extends javax.swing.JFrame {
                 textIDActionPerformed(evt);
             }
         });
-
-        textJobTitle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textJobTitleActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Job Title");
 
         btnFirst.setText("First");
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +206,14 @@ public class adminScreen extends javax.swing.JFrame {
 
         lblPassword.setText("Password");
 
+        lblPassword1.setText("Authentication");
+
+        textAuthorisation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textAuthorisationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -222,30 +221,35 @@ public class adminScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textJobTitle)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(textLastName))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLoginScreen))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(textLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPassword1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(lblPassword)))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textAuthorisation, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -259,11 +263,7 @@ public class adminScreen extends javax.swing.JFrame {
                                         .addComponent(btnSaveRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(42, 42, 42)
                                         .addComponent(btnCancelRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(17, 17, 17))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPassword)
-                                .addGap(57, 57, 57)
-                                .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(17, 17, 17)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -272,20 +272,20 @@ public class adminScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnLoginScreen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textJobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
                     .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword1)
+                    .addComponent(textAuthorisation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNext)
                     .addComponent(btnPrevious)
@@ -300,7 +300,7 @@ public class adminScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveRecord)
                     .addComponent(btnCancelRecord))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -314,10 +314,6 @@ public class adminScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFirstNameActionPerformed
 
-    private void textJobTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textJobTitleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textJobTitleActionPerformed
-
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
 
         try {
@@ -327,12 +323,12 @@ public class adminScreen extends javax.swing.JFrame {
             String id = Integer.toString(id_col);
             String first_name = rs.getString("First_Name");
             String last_name = rs.getString("Last_Name");
-            String job = rs.getString("Job_Title");
+            String setAuthorisation = rs.getString("edit_authorisation");
 
             textID.setText(id);
             textFirstName.setText(first_name);
             textLastName.setText(last_name);
-            textJobTitle.setText(job);
+            textAuthorisation.setText(setAuthorisation);
 
         } catch (SQLException err) {
 
@@ -351,12 +347,13 @@ public class adminScreen extends javax.swing.JFrame {
                 String id = Integer.toString(id_col);
                 String first_name = rs.getString("First_Name");
                 String last_name = rs.getString("Last_Name");
-                String job = rs.getString("Job_Title");
+                String setAuthorisation = rs.getString("edit_authorisation");
 
                 textID.setText(id);
                 textFirstName.setText(first_name);
                 textLastName.setText(last_name);
-                textJobTitle.setText(job);
+                textAuthorisation.setText(setAuthorisation);
+              
 
             } else {
                 rs.previous();
@@ -379,12 +376,12 @@ public class adminScreen extends javax.swing.JFrame {
                 String id = Integer.toString(id_col);
                 String first_name = rs.getString("First_Name");
                 String last_name = rs.getString("Last_Name");
-                String job = rs.getString("Job_Title");
+                String setAuthorisation = rs.getString("edit_authorisation");
 
                 textID.setText(id);
                 textFirstName.setText(first_name);
                 textLastName.setText(last_name);
-                textJobTitle.setText(job);
+                textAuthorisation.setText(setAuthorisation);
 
             } else {
                 rs.next();
@@ -407,12 +404,12 @@ public class adminScreen extends javax.swing.JFrame {
             String id = Integer.toString(id_col);
             String first_name = rs.getString("First_Name");
             String last_name = rs.getString("Last_Name");
-            String job = rs.getString("Job_Title");
+            String setAuthorisation = rs.getString("edit_authorisation");
 
             textID.setText(id);
             textFirstName.setText(first_name);
             textLastName.setText(last_name);
-            textJobTitle.setText(job);
+            textAuthorisation.setText(setAuthorisation);
 
         } catch (SQLException err) {
 
@@ -426,8 +423,8 @@ public class adminScreen extends javax.swing.JFrame {
 
         String first = textFirstName.getText();
         String last = textLastName.getText();
-        String job = textJobTitle.getText();
         String ID = textID.getText();
+        String setAuthorisation = textAuthorisation.getText();
 
         int newID = Integer.parseInt(ID);
 
@@ -435,7 +432,7 @@ public class adminScreen extends javax.swing.JFrame {
             rs.updateInt("ID", newID);
             rs.updateString("First_Name", first);
             rs.updateString("last_Name", last);
-            rs.updateString("Job_Title", job);
+            rs.updateString("edit_authorisation", setAuthorisation);
             rs.updateRow();
             JOptionPane.showMessageDialog(adminScreen.this, "Updated");
         } catch (SQLException err) {
@@ -462,15 +459,15 @@ public class adminScreen extends javax.swing.JFrame {
             rs.next();
             int id_col = rs.getInt("ID");
             String first_name = rs.getString("first_name");
-            String last_name = rs.getString("last_name");
-            String job = rs.getString("job_title");
+            String last_name = rs.getString("last_name");            
+            String setAuthorisation = rs.getString("edit_authorisation");
 
             String id = Integer.toString(id_col);
 
             textID.setText(id);
             textFirstName.setText(first_name);
-            textLastName.setText(last_name);
-            textJobTitle.setText(job);
+            textLastName.setText(last_name);            
+            textAuthorisation.setText(setAuthorisation);
 
             btnFirst.setEnabled(true);
             btnPrevious.setEnabled(true);
@@ -516,9 +513,9 @@ public class adminScreen extends javax.swing.JFrame {
 
         String first = textFirstName.getText();
         String last = textLastName.getText();
-        String job = textJobTitle.getText();
         String ID = textID.getText();
         String password = jPassword.getText();
+        String setAuthorisation = textAuthorisation.getText();
 
         int newID = Integer.parseInt(ID);
 
@@ -529,9 +526,8 @@ public class adminScreen extends javax.swing.JFrame {
             rs.updateInt("ID", newID);
             rs.updateString("First_Name", first);
             rs.updateString("Last_Name", last);
-            rs.updateString("Job_Title", job);
             rs.updateString("Password", password);
-            rs.updateString("edit_authorisation", "u");
+            rs.updateString("edit_authorisation", setAuthorisation);
             rs.insertRow();
 
             stmt.close();
@@ -547,14 +543,13 @@ public class adminScreen extends javax.swing.JFrame {
             int id_col = rs.getInt("ID");
             String first_name2 = rs.getString("first_name");
             String last_name2 = rs.getString("last_name");
-            String job2 = rs.getString("job_title");
-
+            String setAuthorisation2 = rs.getString("edit_authorisation");
+            
             String id = Integer.toString(id_col);
 
             textID.setText(id);
             textFirstName.setText(first_name2);
             textLastName.setText(last_name2);
-            textJobTitle.setText(job2);
 
             btnFirst.setEnabled(true);
             btnPrevious.setEnabled(true);
@@ -594,8 +589,8 @@ public class adminScreen extends javax.swing.JFrame {
 
             textFirstName.setText(rs.getString("First_Name"));
             textLastName.setText(rs.getString("Last_Name"));
-            textJobTitle.setText(rs.getString("Job_Title"));
-            textID.setText(Integer.toString(rs.getInt("ID")));
+            textID.setText(Integer.toString(rs.getInt("ID")));            
+            textAuthorisation.setText(rs.getString("edit_authorisation"));
         } catch (SQLException ex) {
 
         }
@@ -613,6 +608,10 @@ public class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLoginScreenActionPerformed
 
+    private void textAuthorisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textAuthorisationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textAuthorisationActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelRecord;
     private javax.swing.JButton btnDeleteRecord;
@@ -625,12 +624,12 @@ public class adminScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnSaveRecord;
     private javax.swing.JButton btnUpdateRecord;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPassword;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPassword1;
+    private javax.swing.JTextField textAuthorisation;
     private javax.swing.JTextField textFirstName;
     private javax.swing.JTextField textID;
-    private javax.swing.JTextField textJobTitle;
     private javax.swing.JTextField textLastName;
     // End of variables declaration//GEN-END:variables
 }

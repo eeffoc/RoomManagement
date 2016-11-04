@@ -58,7 +58,6 @@ public class userScreen extends javax.swing.JFrame {
                 int id_col = rs.getInt("ID");
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
-                String job = rs.getString("job_title");
                 authorisation = rs.getString("edit_authorisation");
                 
                 System.out.println(rs.getString("edit_authorisation"));
@@ -68,7 +67,6 @@ public class userScreen extends javax.swing.JFrame {
                 textID.setText(id);
                 textFirstName.setText(first_name);
                 textLastName.setText(last_name);
-                textJobTitle.setText(job);
 
                 boolID = true;
             }
@@ -85,7 +83,6 @@ public class userScreen extends javax.swing.JFrame {
         curRow = rs.getRow();
         textFirstName.setText("");
         textLastName.setText("");
-        textJobTitle.setText("");
     }
 
     /**
@@ -101,8 +98,6 @@ public class userScreen extends javax.swing.JFrame {
         textFirstName = new javax.swing.JTextField();
         textID = new javax.swing.JTextField();
         textLastName = new javax.swing.JTextField();
-        textJobTitle = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         btnUpdateRecord = new javax.swing.JButton();
         btnLoginScreen = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
@@ -124,14 +119,6 @@ public class userScreen extends javax.swing.JFrame {
                 textIDActionPerformed(evt);
             }
         });
-
-        textJobTitle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textJobTitleActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Job Title");
 
         btnUpdateRecord.setText("Update");
         btnUpdateRecord.addActionListener(new java.awt.event.ActionListener() {
@@ -157,23 +144,20 @@ public class userScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPassword))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(321, 321, 321)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(348, 348, 348)
                                 .addComponent(btnLoginScreen))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textJobTitle)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(textLastName))
-                                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(textLastName))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPassword)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnUpdateRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -184,22 +168,18 @@ public class userScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnLoginScreen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textJobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
                     .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUpdateRecord)
-                .addGap(25, 25, 25))
+                .addContainerGap())
         );
 
         pack();
@@ -213,15 +193,10 @@ public class userScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFirstNameActionPerformed
 
-    private void textJobTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textJobTitleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textJobTitleActionPerformed
-
     private void btnUpdateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRecordActionPerformed
 
         String first = textFirstName.getText();
         String last = textLastName.getText();
-        String job = textJobTitle.getText();
         String ID = textID.getText();
 
         int newID = Integer.parseInt(ID);
@@ -230,7 +205,6 @@ public class userScreen extends javax.swing.JFrame {
             rs.updateInt("ID", newID);
             rs.updateString("First_Name", first);
             rs.updateString("last_Name", last);
-            rs.updateString("Job_Title", job);
             rs.updateRow();
             JOptionPane.showMessageDialog(userScreen.this, "Updated");
         } catch (SQLException err) {
@@ -255,12 +229,10 @@ public class userScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnLoginScreen;
     private javax.swing.JButton btnUpdateRecord;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPassword;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JTextField textFirstName;
     private javax.swing.JTextField textID;
-    private javax.swing.JTextField textJobTitle;
     private javax.swing.JTextField textLastName;
     // End of variables declaration//GEN-END:variables
 }
