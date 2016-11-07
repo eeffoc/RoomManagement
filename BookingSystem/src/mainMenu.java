@@ -60,6 +60,7 @@ public class mainMenu extends javax.swing.JFrame {
         btnUserScreen = new javax.swing.JButton();
         btnRoomScreen = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
+        btnUserScreen1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,21 +85,29 @@ public class mainMenu extends javax.swing.JFrame {
             }
         });
 
+        btnUserScreen1.setText("My bookings");
+        btnUserScreen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserScreen1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLogOut))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
                         .addComponent(btnUserScreen)
-                        .addGap(72, 72, 72)
-                        .addComponent(btnRoomScreen)
-                        .addGap(0, 78, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(btnUserScreen1)
+                        .addGap(37, 37, 37)
+                        .addComponent(btnRoomScreen)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -106,10 +115,11 @@ public class mainMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnLogOut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRoomScreen)
-                    .addComponent(btnUserScreen))
+                    .addComponent(btnUserScreen)
+                    .addComponent(btnUserScreen1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -158,9 +168,14 @@ public class mainMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRoomScreenActionPerformed
 
+    private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUserScreen1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnRoomScreen;
     private javax.swing.JButton btnUserScreen;
+    private javax.swing.JButton btnUserScreen1;
     // End of variables declaration//GEN-END:variables
 }
