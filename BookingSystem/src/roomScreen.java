@@ -235,6 +235,8 @@ public class roomScreen extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
+        //fix
+        
         DefaultTableModel model = (DefaultTableModel) roomsAvailable.getModel();
 
         model.setRowCount(0);
