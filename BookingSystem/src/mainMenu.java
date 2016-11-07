@@ -31,7 +31,7 @@ public class mainMenu extends javax.swing.JFrame {
     Statement stmt;
     ResultSet rs;
     int curRow = 0;
-    int adminID;
+    int userID;
     
     String authorisation;
     
@@ -41,7 +41,7 @@ public class mainMenu extends javax.swing.JFrame {
         uPass = "";
         con =  DriverManager.getConnection(host, uName, uPass);
 
-        adminID = tempID;
+        userID = tempID;
         authorisation = tempAuthorisation;
         
         initComponents();
@@ -130,7 +130,7 @@ public class mainMenu extends javax.swing.JFrame {
         if (authorisation.equals("a")){
             try {
 
-                new adminScreen(adminID).setVisible(true);
+                new adminScreen(userID).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -139,7 +139,7 @@ public class mainMenu extends javax.swing.JFrame {
         else{
             try {
 
-                new userScreen(adminID).setVisible(true);
+                new userScreen(userID).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -162,8 +162,10 @@ public class mainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnRoomScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoomScreenActionPerformed
-       
-        new roomScreen().setVisible(true);
+
+        
+        
+        new roomScreen(userID, authorisation).setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_btnRoomScreenActionPerformed

@@ -1,19 +1,54 @@
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Christopher
  */
 public class roomScreen extends javax.swing.JFrame {
 
+    String host;
+    String uName;
+    String uPass;
+
+    Connection con;
+    Statement stmt;
+    ResultSet rs;
+
+    int userID;
+    String authorisation;
+
     /**
      * Creates new form roomScreen
      */
-    public roomScreen() {
+    public roomScreen(int ID, String author) throws SQLException {
+
+        host = "jdbc:mysql://localhost/worker";
+        uName = "root";
+        uPass = "";
+        con = DriverManager.getConnection(host, uName, uPass);
+
+        initComponents();
+
+        userID = ID;
+        authorisation = author;
+
         initComponents();
     }
 
@@ -28,35 +63,32 @@ public class roomScreen extends javax.swing.JFrame {
 
         jSpinner1 = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        roomsAvailable = new javax.swing.JTable();
         datePicker = new org.jdesktop.swingx.JXDatePicker();
         dateLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner2 = new javax.swing.JSpinner();
+        cmbTime = new javax.swing.JComboBox<>();
+        spnCapacity = new javax.swing.JSpinner();
         dateLabel1 = new javax.swing.JLabel();
         dateLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        checkProjector = new javax.swing.JCheckBox();
         btnBook = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
-        btnSearch1 = new javax.swing.JButton();
+        btnLoginScreen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        roomsAvailable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        roomsAvailable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Room name", "Type", "Room capacity", "Projector"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -70,8 +102,7 @@ public class roomScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setEnabled(false);
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(roomsAvailable);
 
         datePicker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,25 +114,35 @@ public class roomScreen extends javax.swing.JFrame {
 
         timeLabel.setText("Time:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00", " " }));
+        cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00", " " }));
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spnCapacity.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         dateLabel1.setText("Date:");
 
         dateLabel2.setText("Capacity:");
 
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkProjector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkProjectorActionPerformed(evt);
             }
         });
 
         btnBook.setText("Book");
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
-        btnSearch1.setText("Back");
+        btnLoginScreen.setText("Back to menu");
+        btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginScreenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,18 +165,18 @@ public class roomScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCheckBox1))
+                                    .addComponent(checkProjector))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnSearch))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(spnCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnSearch1)))
+                                        .addComponent(btnLoginScreen)))
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,12 +191,12 @@ public class roomScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateLabel2)
-                    .addComponent(btnSearch1))
+                    .addComponent(btnLoginScreen))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox1)
+                    .addComponent(checkProjector)
                     .addComponent(dateLabel))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,7 +205,7 @@ public class roomScreen extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(timeLabel)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,63 +217,87 @@ public class roomScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void datePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerActionPerformed
+    private void checkProjectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkProjectorActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_checkProjectorActionPerformed
+
+    private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
+
+        this.dispose();
+
+        try {
+            new mainMenu(userID, authorisation).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(roomScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnLoginScreenActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
+        DefaultTableModel model = (DefaultTableModel) roomsAvailable.getModel();
+
+        model.setRowCount(0);
+        
+        int capacity = (int) spnCapacity.getValue();
+        boolean projector = checkProjector.isSelected();
+
+        JComboBox<String> bookingTime = cmbTime;
+
+        System.out.println(projector);
+        
+        try {
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = String.format("SELECT * FROM `room` WHERE capacity < " + 11 + " and projector = " + projector);
+            rs = stmt.executeQuery(SQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(roomScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            while (rs.next()) {
+
+                int data1 = rs.getInt("ID");
+                String data2 = rs.getString("type");
+                int data3 = rs.getInt("capacity");
+                int tempdata4 = rs.getInt("projector");
+                boolean data4 = false;
+                if (tempdata4 == 1) {
+                    data4 = true;
+                }
+
+                Object[] row = {data1, data2, data3, data4};
+
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(roomScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void datePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerActionPerformed
+
+
     }//GEN-LAST:event_datePickerActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(roomScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(roomScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(roomScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(roomScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new roomScreen().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBook;
+    private javax.swing.JButton btnLoginScreen;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearch1;
+    private javax.swing.JCheckBox checkProjector;
+    private javax.swing.JComboBox<String> cmbTime;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dateLabel1;
     private javax.swing.JLabel dateLabel2;
     private org.jdesktop.swingx.JXDatePicker datePicker;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable roomsAvailable;
+    private javax.swing.JSpinner spnCapacity;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 }
