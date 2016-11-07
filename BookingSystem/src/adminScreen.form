@@ -246,7 +246,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPassword1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Authentication"/>
+        <Property name="text" type="java.lang.String" value="Authorisation"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textAuthorisation">

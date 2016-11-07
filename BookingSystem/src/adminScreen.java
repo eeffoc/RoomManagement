@@ -206,7 +206,7 @@ public class adminScreen extends javax.swing.JFrame {
 
         lblPassword.setText("Password");
 
-        lblPassword1.setText("Authentication");
+        lblPassword1.setText("Authorisation");
 
         textAuthorisation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
