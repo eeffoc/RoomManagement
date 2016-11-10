@@ -1,12 +1,9 @@
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -17,12 +14,13 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author Christopher
  */
-public class roomScreen extends javax.swing.JFrame {
-
+public class bookingScreen extends javax.swing.JFrame {
+    
     String host;
     String uName;
     String uPass;
@@ -33,22 +31,20 @@ public class roomScreen extends javax.swing.JFrame {
 
     int userID;
     String authorisation;
-
+    
     /**
-     * Creates new form roomScreen
+     * Creates new form bookingScreen
      */
-    public roomScreen(int ID, String author) throws SQLException {
-
+    public bookingScreen(int ID, String author) throws SQLException {
+        
         host = "jdbc:mysql://localhost/worker";
         uName = "root";
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
 
-        initComponents();
-
         userID = ID;
         authorisation = author;
-
+        
         initComponents();
     }
 
@@ -61,9 +57,12 @@ public class roomScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSpinner1 = new javax.swing.JSpinner();
+        checkProjector = new javax.swing.JCheckBox();
+        btnBook = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         roomsAvailable = new javax.swing.JTable();
+        btnSearch = new javax.swing.JButton();
+        btnLoginScreen = new javax.swing.JButton();
         datePicker = new org.jdesktop.swingx.JXDatePicker();
         dateLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
@@ -71,12 +70,16 @@ public class roomScreen extends javax.swing.JFrame {
         spnCapacity = new javax.swing.JSpinner();
         dateLabel1 = new javax.swing.JLabel();
         dateLabel2 = new javax.swing.JLabel();
-        checkProjector = new javax.swing.JCheckBox();
-        btnBook = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
-        btnLoginScreen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        checkProjector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkProjectorActionPerformed(evt);
+            }
+        });
+
+        btnBook.setText("Book");
 
         roomsAvailable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         roomsAvailable.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,6 +107,20 @@ public class roomScreen extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(roomsAvailable);
 
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnLoginScreen.setText("Back to menu");
+        btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginScreenActionPerformed(evt);
+            }
+        });
+
         datePicker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 datePickerActionPerformed(evt);
@@ -121,28 +138,6 @@ public class roomScreen extends javax.swing.JFrame {
         dateLabel1.setText("Date:");
 
         dateLabel2.setText("Capacity:");
-
-        checkProjector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkProjectorActionPerformed(evt);
-            }
-        });
-
-        btnBook.setText("Book");
-
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        btnLoginScreen.setText("Back to menu");
-        btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginScreenActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,41 +216,31 @@ public class roomScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkProjectorActionPerformed
 
-    private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
-
-        this.dispose();
-
-        try {
-            new mainMenu(userID, authorisation).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(roomScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_btnLoginScreenActionPerformed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
         //fix
-        
+
         DefaultTableModel model = (DefaultTableModel) roomsAvailable.getModel();
 
         model.setRowCount(0);
-        
+
         int capacity = (int) spnCapacity.getValue();
         boolean projector = checkProjector.isSelected();
 
         JComboBox<String> bookingTime = cmbTime;
 
         System.out.println(projector);
-        
+
+       
         try {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL = String.format("SELECT * FROM `room` WHERE capacity < " + 11 + " and projector = " + projector);
             rs = stmt.executeQuery(SQL);
         } catch (SQLException ex) {
-            Logger.getLogger(roomScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+           
+        
         try {
             while (rs.next()) {
 
@@ -274,14 +259,24 @@ public class roomScreen extends javax.swing.JFrame {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(roomScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void datePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerActionPerformed
+    private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
 
+        this.dispose();
+
+        try {
+            new mainMenu(userID, authorisation).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnLoginScreenActionPerformed
+
+    private void datePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerActionPerformed
 
     }//GEN-LAST:event_datePickerActionPerformed
 
@@ -297,7 +292,6 @@ public class roomScreen extends javax.swing.JFrame {
     private javax.swing.JLabel dateLabel2;
     private org.jdesktop.swingx.JXDatePicker datePicker;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable roomsAvailable;
     private javax.swing.JSpinner spnCapacity;
     private javax.swing.JLabel timeLabel;

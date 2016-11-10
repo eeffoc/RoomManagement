@@ -163,10 +163,14 @@ public class mainMenu extends javax.swing.JFrame {
 
     private void btnRoomScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoomScreenActionPerformed
 
+        try {
+            new bookingScreen(userID, authorisation).setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
-        new roomScreen(userID, authorisation).setVisible(true);
-        this.dispose();
         
     }//GEN-LAST:event_btnRoomScreenActionPerformed
 
