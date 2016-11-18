@@ -39,7 +39,7 @@ public class loginScreen extends javax.swing.JFrame {
 
         Class.forName("com.mysql.jdbc.Driver");
 
-        host = "jdbc:mysql://localhost/worker";
+        host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
 
@@ -47,7 +47,7 @@ public class loginScreen extends javax.swing.JFrame {
         //This chunk accesses the database
 
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM Worker";
+        String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
         //This will access the table
     }

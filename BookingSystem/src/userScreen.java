@@ -30,7 +30,7 @@ public class userScreen extends javax.swing.JFrame {
      */
     public userScreen(int tempID) throws SQLException {
 
-        host = "jdbc:mysql://localhost/worker";
+        host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
@@ -47,7 +47,7 @@ public class userScreen extends javax.swing.JFrame {
         boolean boolID = false;
 
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM Worker";
+        String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
         //This will access the table
         

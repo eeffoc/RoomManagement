@@ -36,7 +36,7 @@ public class mainMenu extends javax.swing.JFrame {
     String authorisation;
     
     public mainMenu( int tempID, String tempAuthorisation) throws SQLException {
-        host = "jdbc:mysql://localhost/worker";
+        host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
         con =  DriverManager.getConnection(host, uName, uPass);

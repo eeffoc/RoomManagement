@@ -37,7 +37,7 @@ public class bookingScreen extends javax.swing.JFrame {
      */
     public bookingScreen(int ID, String author) throws SQLException {
         
-        host = "jdbc:mysql://localhost/worker";
+        host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
@@ -228,13 +228,23 @@ public class bookingScreen extends javax.swing.JFrame {
         boolean projector = checkProjector.isSelected();
 
         JComboBox<String> bookingTime = cmbTime;
-
-        System.out.println(projector);
-
        
         try {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = String.format("SELECT * FROM `room` WHERE capacity < " + 11 + " and projector = " + projector);
+            String SQL;
+            SQL = String.format("SELECT * FROM room JOIN bookings ON bookings.roomID = room.id WHERE room.projector = 0 AND room.capacity <= 21 AND !(bookings.date = \"2016-11-16\" AND bookings.time = \"9:00:00\")");
+            //Need way to check if room us taken at time
+            
+            
+            /*
+                SELECT * FROM room
+                JOIN bookings
+                ON bookings.roomID = room.id	
+                WHERE room.projector = 0
+                AND room.capacity <= 20
+                AND !(bookings.date = "2016-11-16" AND bookings.time = "10:00:00")
+             */
+            
             rs = stmt.executeQuery(SQL);
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);

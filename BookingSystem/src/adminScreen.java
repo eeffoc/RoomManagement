@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To   change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -10,81 +5,89 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * The class will create an interface for the user. In this interface, the admin
+ * can view all users on the system and edit their details if it is required.
+ * The admin can also add new users on the system.
  *
  * @author Christopher
  */
-public class adminScreen extends javax.swing.JFrame {
+public final class adminScreen extends javax.swing.JFrame {
 
-    String host;
-    String uName;
-    String uPass;
+    String host;        // A string to store where the database is
+    String uName;       // A string to store the default user to access the database
+    String uPass;       // A string to store the default password to access the database
 
-    Connection con;
-    Statement stmt;
-    ResultSet rs;
-    int curRow = 0;
-    int userID;
-    String authorisation = "";    
-    /**
-     * Creates new form Workers
-     */
+    Connection con;     // A connection variable to refer to the database connection made
+    Statement stmt;     // A statement to store the SQL being run in the database 
+    ResultSet rs;       // A resultSet which stores the results of a run query
+    int curRow = 0;     // An integer to store the row the user is currently in
+    int userID;     //An interger to store the users ID         
+
     public adminScreen(int tempID) throws SQLException {
 
-        host = "jdbc:mysql://localhost/worker";
+        // Connecting to a set database and storing that connection in connection con for reference.
+        host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
+
+        // Storing userID for reference
         userID = tempID;
-        
+
+        // Making the interface visible to users
         initComponents();
+
+        //Connecting the system to the database, collecting all the user data through the query
         DoConnect();
-    
+
     }
-    
+
+    //Runs the sql statemtn to collect user details, and then gets each ready to view.
     @SuppressWarnings("empty-statement")
     public void DoConnect() throws SQLException {
 
-        boolean boolID = false;
-
+        //Runs SQL statement on the database
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM Worker";
+        String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
         //This will access the table
-        
-        while (rs.next()){
-  
-            if (rs.getInt("ID") == userID && !boolID) {
-                
+
+        while (rs.next()) {      //Loop while there is data to search
+
+            if (rs.getInt("ID") == userID) {     // If the id is equal to the user ID
+
+                //Get the users details from the database
                 int id_col = rs.getInt("ID");
+                String id = Integer.toString(id_col);
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String setAuthorisation = rs.getString("edit_authorisation");
-                
-                System.out.println(rs.getString("edit_authorisation"));
-
-                String id = Integer.toString(id_col);
 
                 textID.setText(id);
                 textFirstName.setText(first_name);
                 textLastName.setText(last_name);
                 textAuthorisation.setText(setAuthorisation);
+                // Put all user details to interface text boxes
 
-                boolID = true;
             }
         }
     }
 
-    private void goToEnd() throws SQLException {
+    private void getRecordDetails() throws SQLException {
 
-        rs.last();
-        int ID = rs.getInt("ID") + 1;
+        //Get the  recordsets details
+        int id_col = rs.getInt("ID");
+        String id = Integer.toString(id_col);
+        String first_name = rs.getString("First_Name");
+        String last_name = rs.getString("Last_Name");
+        String setAuthorisation = rs.getString("edit_authorisation");
 
-        textID.setText(Integer.toString(ID));
+        //Put the first recordsets details on the screen
+        textID.setText(id);
+        textFirstName.setText(first_name);
+        textLastName.setText(last_name);
+        textAuthorisation.setText(setAuthorisation);
 
-        curRow = rs.getRow();
-        textFirstName.setText("");
-        textLastName.setText("");
-        textAuthorisation.setText("");
     }
 
     /**
@@ -314,23 +317,16 @@ public class adminScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFirstNameActionPerformed
 
+    //When the "first" button is pressed
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
 
         try {
 
-            rs.first();
-            int id_col = rs.getInt("ID");
-            String id = Integer.toString(id_col);
-            String first_name = rs.getString("First_Name");
-            String last_name = rs.getString("Last_Name");
-            String setAuthorisation = rs.getString("edit_authorisation");
+            rs.first();     // Go to the first record in recordset 
 
-            textID.setText(id);
-            textFirstName.setText(first_name);
-            textLastName.setText(last_name);
-            textAuthorisation.setText(setAuthorisation);
+            getRecordDetails();
 
-        } catch (SQLException err) {
+        } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
 
             JOptionPane.showMessageDialog(adminScreen.this, err.getMessage());
 
@@ -338,28 +334,22 @@ public class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnFirstActionPerformed
 
+    //When the "next" button is pressed
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
 
         try {
-            if (rs.next()) {
 
-                int id_col = rs.getInt("ID");
-                String id = Integer.toString(id_col);
-                String first_name = rs.getString("First_Name");
-                String last_name = rs.getString("Last_Name");
-                String setAuthorisation = rs.getString("edit_authorisation");
+            if (rs.next()) {        //If there is another record after the current record
 
-                textID.setText(id);
-                textFirstName.setText(first_name);
-                textLastName.setText(last_name);
-                textAuthorisation.setText(setAuthorisation);
-              
+                getRecordDetails();
 
             } else {
+                //Go back to the current record and display message to the screen
                 rs.previous();
                 JOptionPane.showMessageDialog(adminScreen.this, "End of database");
             }
-        } catch (SQLException err) {
+
+        } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
 
             JOptionPane.showMessageDialog(adminScreen.this, err.getMessage());
 
@@ -367,26 +357,20 @@ public class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNextActionPerformed
 
+    //When the "previous" button is pressed
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
 
         try {
-            if (rs.previous()) {
 
-                int id_col = rs.getInt("ID");
-                String id = Integer.toString(id_col);
-                String first_name = rs.getString("First_Name");
-                String last_name = rs.getString("Last_Name");
-                String setAuthorisation = rs.getString("edit_authorisation");
+            if (rs.previous()) {        //If there is another record before the current record
 
-                textID.setText(id);
-                textFirstName.setText(first_name);
-                textLastName.setText(last_name);
-                textAuthorisation.setText(setAuthorisation);
+                getRecordDetails();
 
             } else {
                 rs.next();
                 JOptionPane.showMessageDialog(adminScreen.this, "Start of database");
             }
+
         } catch (SQLException err) {
 
             JOptionPane.showMessageDialog(adminScreen.this, err.getMessage());
@@ -395,21 +379,14 @@ public class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPreviousActionPerformed
 
+     //When the "last" button is pressed
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
 
         try {
 
-            rs.last();
-            int id_col = rs.getInt("ID");
-            String id = Integer.toString(id_col);
-            String first_name = rs.getString("First_Name");
-            String last_name = rs.getString("Last_Name");
-            String setAuthorisation = rs.getString("edit_authorisation");
-
-            textID.setText(id);
-            textFirstName.setText(first_name);
-            textLastName.setText(last_name);
-            textAuthorisation.setText(setAuthorisation);
+            rs.last();      // Go to the last record in the table
+            
+            getRecordDetails();
 
         } catch (SQLException err) {
 
@@ -419,56 +396,65 @@ public class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLastActionPerformed
 
+     //When the "update" button is pressed
     private void btnUpdateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRecordActionPerformed
 
+        //Temporary Strings to hold the updated user details
         String first = textFirstName.getText();
         String last = textLastName.getText();
         String ID = textID.getText();
         String setAuthorisation = textAuthorisation.getText();
-
         int newID = Integer.parseInt(ID);
 
         try {
+            //Update the recordset in the database
             rs.updateInt("ID", newID);
             rs.updateString("First_Name", first);
             rs.updateString("last_Name", last);
             rs.updateString("edit_authorisation", setAuthorisation);
             rs.updateRow();
             JOptionPane.showMessageDialog(adminScreen.this, "Updated");
-        } catch (SQLException err) {
+        }
+        catch (SQLException err) {
             System.out.println(err.getMessage());
         }
 
     }//GEN-LAST:event_btnUpdateRecordActionPerformed
 
+     //When the "delete" button is pressed
     private void btnDeleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRecordActionPerformed
 
         try {
 
-            rs.deleteRow();
-
-            stmt.close();
+            rs.deleteRow();     //Delete the current row
+  
+            //Close the database
+            stmt.close();     
             rs.close();
 
+            //Reopen the database
             con = DriverManager.getConnection(host, uName, uPass);
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM Worker";
+            String SQL = "SELECT * FROM user";
             rs = stmt.executeQuery(SQL);
             //This will access the table
 
+            // Get record set details
             rs.next();
             int id_col = rs.getInt("ID");
             String first_name = rs.getString("first_name");
-            String last_name = rs.getString("last_name");            
+            String last_name = rs.getString("last_name");
             String setAuthorisation = rs.getString("edit_authorisation");
 
             String id = Integer.toString(id_col);
 
+            // Put recordset details to the screen
             textID.setText(id);
             textFirstName.setText(first_name);
-            textLastName.setText(last_name);            
+            textLastName.setText(last_name);
             textAuthorisation.setText(setAuthorisation);
 
+            //Set the buttons relevant clickable
             btnFirst.setEnabled(true);
             btnPrevious.setEnabled(true);
             btnNext.setEnabled(true);
@@ -488,8 +474,10 @@ public class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteRecordActionPerformed
 
+     //When the "new record" button is pressed
     private void btnNewRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewRecordActionPerformed
 
+        // Make relevant buttons clickable
         btnFirst.setEnabled(false);
         btnPrevious.setEnabled(false);
         btnNext.setEnabled(false);
@@ -502,55 +490,70 @@ public class adminScreen extends javax.swing.JFrame {
         btnCancelRecord.setEnabled(true);
 
         try {
-            goToEnd();
+            rs.last();      // Go to last user iin recordset
+            int ID = rs.getInt("ID") + 1;       // Get the ID and add one to it
+
+            textID.setText(Integer.toString(ID));       // Covert the ID to a string
+
+            curRow = rs.getRow();       //Set the current row to the row moved to
+            textFirstName.setText("");      //Set the text of
+            textLastName.setText("");
+            textAuthorisation.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnNewRecordActionPerformed
 
+    //When the "save" button is pressed
     private void btnSaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRecordActionPerformed
 
+        // Store all entered data into temporary varialbes
         String first = textFirstName.getText();
         String last = textLastName.getText();
         String ID = textID.getText();
+        int newID = Integer.parseInt(ID);
         String password = jPassword.getText();
         String setAuthorisation = textAuthorisation.getText();
 
-        int newID = Integer.parseInt(ID);
 
         try {
 
-            rs.moveToInsertRow();
+            rs.moveToInsertRow();   //Move to the end of record set
 
-            rs.updateInt("ID", newID);
+            //Update recordset with the new record
+            rs.updateInt("ID", newID);      
             rs.updateString("First_Name", first);
             rs.updateString("Last_Name", last);
             rs.updateString("Password", password);
             rs.updateString("edit_authorisation", setAuthorisation);
             rs.insertRow();
 
+            //Close the database
             stmt.close();
             rs.close();
 
+            //Reconnect to the database
             con = DriverManager.getConnection(host, uName, uPass);
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM Worker";
+            String SQL = "SELECT * FROM user";
             rs = stmt.executeQuery(SQL);
             //This will access the table
 
+            //Get recordset details
             rs.next();
             int id_col = rs.getInt("ID");
+            String id = Integer.toString(id_col);
             String first_name2 = rs.getString("first_name");
             String last_name2 = rs.getString("last_name");
             String setAuthorisation2 = rs.getString("edit_authorisation");
-            
-            String id = Integer.toString(id_col);
 
+            //Put recordset details to the screen
             textID.setText(id);
             textFirstName.setText(first_name2);
             textLastName.setText(last_name2);
-
+            
+            //Set necessary buttons to clickable
             btnFirst.setEnabled(true);
             btnPrevious.setEnabled(true);
             btnNext.setEnabled(true);
@@ -564,7 +567,7 @@ public class adminScreen extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Record Saved");
 
-        } catch (SQLException ex) {
+        } catch (SQLException ex) {     //Catch any SQL errors and keep running
             Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -573,6 +576,7 @@ public class adminScreen extends javax.swing.JFrame {
 
     private void btnCancelRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelRecordActionPerformed
 
+        //Set relevant buttons to clickable
         btnFirst.setEnabled(true);
         btnPrevious.setEnabled(true);
         btnNext.setEnabled(true);
@@ -585,11 +589,11 @@ public class adminScreen extends javax.swing.JFrame {
         btnCancelRecord.setEnabled(false);
 
         try {
-            rs.absolute(curRow);
-
+            //Go back to the last viewed record and show the details of last viewed record
+            rs.absolute(curRow);    
             textFirstName.setText(rs.getString("First_Name"));
             textLastName.setText(rs.getString("Last_Name"));
-            textID.setText(Integer.toString(rs.getInt("ID")));            
+            textID.setText(Integer.toString(rs.getInt("ID")));
             textAuthorisation.setText(rs.getString("edit_authorisation"));
         } catch (SQLException ex) {
 
@@ -600,8 +604,8 @@ public class adminScreen extends javax.swing.JFrame {
     private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
 
         try {
-            this.dispose();
-            new mainMenu(userID, "a").setVisible(true);
+            this.dispose();     //Close the current screen
+            new mainMenu(userID, "a").setVisible(true);     //Open the main menu
         } catch (SQLException ex) {
             Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }

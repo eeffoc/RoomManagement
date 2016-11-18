@@ -32,7 +32,7 @@ public class newUser extends javax.swing.JFrame {
 
     public newUser() throws SQLException {
 
-        host = "jdbc:mysql://localhost/worker";
+        host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
@@ -46,7 +46,7 @@ public class newUser extends javax.swing.JFrame {
     public void DoConnect() throws SQLException {
 
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM Worker";
+        String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
         
         rs.last();
