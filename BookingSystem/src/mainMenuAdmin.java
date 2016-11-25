@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author up772320
  */
-public class mainMenu extends javax.swing.JFrame {
+public class mainMenuAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form mainMenu
@@ -35,10 +35,10 @@ public class mainMenu extends javax.swing.JFrame {
     
     String authorisation;
     
-    public mainMenu( int tempID) throws SQLException {
+    public mainMenuAdmin( int tempID) throws SQLException {
         
         userID = tempID;
-        authorisation = "u";
+        authorisation = "a";
         
         initComponents();
     }
@@ -54,15 +54,24 @@ public class mainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         btnUserScreen = new javax.swing.JButton();
+        btnRoomScreen = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
         btnUserScreen1 = new javax.swing.JButton();
+        btnEditRooms = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnUserScreen.setText("My details");
+        btnUserScreen.setText("View users");
         btnUserScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUserScreenActionPerformed(evt);
+            }
+        });
+
+        btnRoomScreen.setText("View rooms");
+        btnRoomScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRoomScreenActionPerformed(evt);
             }
         });
 
@@ -80,6 +89,13 @@ public class mainMenu extends javax.swing.JFrame {
             }
         });
 
+        btnEditRooms.setText("Edit Rooms");
+        btnEditRooms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditRoomsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,10 +108,15 @@ public class mainMenu extends javax.swing.JFrame {
                         .addComponent(btnLogOut))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnUserScreen)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(btnUserScreen1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)))
+                        .addGap(37, 37, 37)
+                        .addComponent(btnRoomScreen)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEditRooms)
+                .addGap(107, 107, 107))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,8 +125,11 @@ public class mainMenu extends javax.swing.JFrame {
                 .addComponent(btnLogOut)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRoomScreen)
                     .addComponent(btnUserScreen)
                     .addComponent(btnUserScreen1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEditRooms)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -115,7 +139,7 @@ public class mainMenu extends javax.swing.JFrame {
     private void btnUserScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreenActionPerformed
          
         try {
-            new userScreen(userID).setVisible(true);
+            new adminScreen(userID).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -135,12 +159,38 @@ public class mainMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLogOutActionPerformed
 
+    private void btnRoomScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoomScreenActionPerformed
+
+        try {
+            new bookingScreen(userID, authorisation).setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnRoomScreenActionPerformed
+
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUserScreen1ActionPerformed
 
+    private void btnEditRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoomsActionPerformed
+        
+        try {
+            new roomsScreen(userID).setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnEditRoomsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditRooms;
     private javax.swing.JButton btnLogOut;
+    private javax.swing.JButton btnRoomScreen;
     private javax.swing.JButton btnUserScreen;
     private javax.swing.JButton btnUserScreen1;
     // End of variables declaration//GEN-END:variables

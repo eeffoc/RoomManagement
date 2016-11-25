@@ -279,11 +279,21 @@ public class bookingScreen extends javax.swing.JFrame {
 
         this.dispose();
 
-        try {
-            new mainMenu(userID, authorisation).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+        if (authorisation.equals("a")){
+            try {
+                new mainMenuAdmin(userID).setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else{
+            try {
+                new mainMenu(userID).setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+            
     }//GEN-LAST:event_btnLoginScreenActionPerformed
 
     private void datePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerActionPerformed

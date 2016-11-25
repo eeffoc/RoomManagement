@@ -52,7 +52,7 @@ public class userScreen extends javax.swing.JFrame {
         //This will access the table
         
         while (rs.next()){
-  
+            
             if (rs.getInt("ID") == userID && !boolID) {
                 
                 int id_col = rs.getInt("ID");
@@ -71,18 +71,6 @@ public class userScreen extends javax.swing.JFrame {
                 boolID = true;
             }
         }
-    }
-
-    private void goToEnd() throws SQLException {
-
-        rs.last();
-        int ID = rs.getInt("ID") + 1;
-
-        textID.setText(Integer.toString(ID));
-
-        curRow = rs.getRow();
-        textFirstName.setText("");
-        textLastName.setText("");
     }
 
     /**
@@ -217,7 +205,7 @@ public class userScreen extends javax.swing.JFrame {
 
         try {
             this.dispose();
-            new mainMenu(userID, "u").setVisible(true);
+            new mainMenu(userID).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }

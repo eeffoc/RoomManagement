@@ -167,11 +167,23 @@ public class loginScreen extends javax.swing.JFrame {
         try {
 
             if (boolID) {
-               
-                new mainMenu(adminID, authorisation).setVisible(true);
-                this.dispose();
+                
+                if (authorisation.equals("u")){
+                    
+                    new mainMenu(adminID).setVisible(true);
+                    this.dispose();
+                    
+                }
+                
+                else if(authorisation.equals("a")){
+                    
+                    new mainMenuAdmin(adminID).setVisible(true);
+                    this.dispose();
+                    
+                }                
 
             } else {
+                
                 JOptionPane.showMessageDialog(loginScreen.this, "Password incorrect");
 
                 stmt.close();
@@ -179,6 +191,7 @@ public class loginScreen extends javax.swing.JFrame {
 
                 new loginScreen().setVisible(true);
                 this.dispose();
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
