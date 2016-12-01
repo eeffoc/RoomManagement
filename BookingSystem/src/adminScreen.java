@@ -61,7 +61,7 @@ public final class adminScreen extends javax.swing.JFrame {
                 String id = Integer.toString(id_col);
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
-                String setAuthorisation = rs.getString("edit_authorisation");
+                String setAuthorisation = rs.getString("authorisation");
 
                 textID.setText(id);
                 textFirstName.setText(first_name);
@@ -80,7 +80,7 @@ public final class adminScreen extends javax.swing.JFrame {
         String id = Integer.toString(id_col);
         String first_name = rs.getString("First_Name");
         String last_name = rs.getString("Last_Name");
-        String setAuthorisation = rs.getString("edit_authorisation");
+        String setAuthorisation = rs.getString("authorisation");
 
         //Put the first recordsets details on the screen
         textID.setText(id);

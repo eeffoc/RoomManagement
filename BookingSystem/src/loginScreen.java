@@ -145,7 +145,7 @@ public class loginScreen extends javax.swing.JFrame {
 
                         if (password.equals(rs.getString("Password"))) {
                             boolID = true;
-                            authorisation = rs.getString("edit_authorisation");
+                            authorisation = rs.getString("authorisation");
                         }
                     }
                 } catch (SQLException ex) {
