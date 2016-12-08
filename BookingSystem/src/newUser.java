@@ -49,8 +49,16 @@ public class newUser extends javax.swing.JFrame {
         String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
         
-        rs.last();
-        int ID = rs.getInt("ID") + 1;
+        int ID = 1;
+        
+        try {
+            rs.last();
+            ID = rs.getInt("ID") + 1;
+        }
+         catch (SQLException ex) {
+         }
+        
+       
 
         textID.setText(Integer.toString(ID));
         textFirstName.setText("");
@@ -195,7 +203,7 @@ public class newUser extends javax.swing.JFrame {
             rs.updateString("First_Name", first);
             rs.updateString("Last_Name", last);
             rs.updateString("Password", password);
-            rs.updateString("authorisation", "u");
+            rs.updateString("edit_authorisation", "u");
             rs.insertRow();
 
             JOptionPane.showMessageDialog(this, "Record Saved");

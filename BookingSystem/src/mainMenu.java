@@ -35,7 +35,7 @@ public class mainMenu extends javax.swing.JFrame {
     
     String authorisation;
     
-    public mainMenu( int tempID) throws SQLException {
+    public mainMenu(int tempID) throws SQLException {
         
         userID = tempID;
         authorisation = "u";
@@ -81,7 +81,7 @@ public class mainMenu extends javax.swing.JFrame {
             }
         });
 
-        btnUserScreen2.setText("My bookings");
+        btnUserScreen2.setText("Make booking");
         btnUserScreen2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUserScreen2ActionPerformed(evt);
@@ -103,7 +103,7 @@ public class mainMenu extends javax.swing.JFrame {
                         .addComponent(btnUserScreen)
                         .addGap(28, 28, 28)
                         .addComponent(btnUserScreen2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addComponent(btnUserScreen1)
                         .addGap(37, 37, 37))))
         );
@@ -147,11 +147,21 @@ public class mainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
-        // TODO add your handling code here:
+        
+        new myBookings(userID, authorisation).setVisible(true);
+        this.dispose();
+            
     }//GEN-LAST:event_btnUserScreen1ActionPerformed
 
     private void btnUserScreen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen2ActionPerformed
-        // TODO add your handling code here:
+       
+        try {
+            new bookingScreen(userID, authorisation).setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnUserScreen2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

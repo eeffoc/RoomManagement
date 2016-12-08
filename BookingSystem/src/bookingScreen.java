@@ -80,6 +80,11 @@ public class bookingScreen extends javax.swing.JFrame {
         });
 
         btnBook.setText("Book");
+        btnBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookActionPerformed(evt);
+            }
+        });
 
         roomsAvailable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         roomsAvailable.setModel(new javax.swing.table.DefaultTableModel(
@@ -232,7 +237,7 @@ public class bookingScreen extends javax.swing.JFrame {
         try {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL;
-            SQL = String.format("SELECT * FROM room JOIN bookings ON bookings.roomID = room.id WHERE room.projector = 0 AND room.capacity <= 21 AND !(bookings.date = \"2016-11-16\" AND bookings.time = \"9:00:00\")");
+            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE room.projector = 0 AND room.capacity <= 21 AND !(booking.date = \"2016-11-16\" AND booking.time = \"9:00:00\")");
             //Need way to check if room us taken at time
             
             
@@ -299,6 +304,10 @@ public class bookingScreen extends javax.swing.JFrame {
     private void datePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerActionPerformed
 
     }//GEN-LAST:event_datePickerActionPerformed
+
+    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBookActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

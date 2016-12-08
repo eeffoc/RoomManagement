@@ -68,7 +68,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnRoomScreen.setText("View rooms");
+        btnRoomScreen.setText("Make booking");
         btnRoomScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRoomScreenActionPerformed(evt);
@@ -101,22 +101,21 @@ public class mainMenuAdmin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogOut))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnUserScreen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(btnUserScreen1)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnRoomScreen)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEditRooms)
-                .addGap(107, 107, 107))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogOut, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnUserScreen)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(btnEditRooms))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRoomScreen)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUserScreen1)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +127,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
                     .addComponent(btnRoomScreen)
                     .addComponent(btnUserScreen)
                     .addComponent(btnUserScreen1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditRooms)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -173,7 +172,10 @@ public class mainMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRoomScreenActionPerformed
 
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
-        // TODO add your handling code here:
+
+        new myBookings(userID, authorisation).setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_btnUserScreen1ActionPerformed
 
     private void btnEditRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoomsActionPerformed

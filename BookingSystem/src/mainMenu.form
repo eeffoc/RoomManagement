@@ -35,7 +35,7 @@
                       <Component id="btnUserScreen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="btnUserScreen2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
                       <Component id="btnUserScreen1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
@@ -86,7 +86,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnUserScreen2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="My bookings"/>
+        <Property name="text" type="java.lang.String" value="Make booking"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUserScreen2ActionPerformed"/>
