@@ -75,10 +75,14 @@ public class myBookings extends javax.swing.JFrame {
         });
 
         jCmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Board room", "Training room" }));
+        jCmbType.setEnabled(false);
 
         spnCap.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spnCap.setEnabled(false);
 
         lblProjector.setText("Projector");
+
+        chkProj.setEnabled(false);
 
         btnLoginScreen.setText("Back to menu");
         btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +107,9 @@ public class myBookings extends javax.swing.JFrame {
         lblProjector2.setText("Time");
 
         cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00", " " }));
+        cmbTime.setEnabled(false);
+
+        datePicker.setEditable(false);
 
         btnNext1.setText("Delete");
         btnNext1.addActionListener(new java.awt.event.ActionListener() {
