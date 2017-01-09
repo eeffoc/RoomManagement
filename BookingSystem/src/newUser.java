@@ -37,8 +37,6 @@ public class newUser extends javax.swing.JFrame {
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
 
-
-
         initComponents();
         DoConnect();
     }

@@ -33,6 +33,7 @@ public class loginScreen extends javax.swing.JFrame {
 
         initComponents();
         doConnect();
+        
     }
     
     private void doConnect() throws ClassNotFoundException, SQLException {

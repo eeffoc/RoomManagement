@@ -1,8 +1,13 @@
 
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,17 +24,64 @@ public class myBookings extends javax.swing.JFrame {
      * Creates new form myBookings
      */
     
+    
+        String host;
+    String uName;
+    String uPass;
+
+    Connection con;
+    Statement stmt;
+    ResultSet rs;
+    int curRow = 0;
     int ID;
     String author;
     
-    public myBookings(int userID, String authorisation) {
+    public myBookings(int userID, String authorisation) throws SQLException {
+        
+        host = "jdbc:mysql://localhost/bookingsystem";
+        uName = "root";
+        uPass = "";
+        con = DriverManager.getConnection(host, uName, uPass);   
         
         ID = userID;
         author = authorisation;
         
         initComponents();
+        DoConnect();
     }
 
+    public void DoConnect() throws SQLException {
+
+        boolean boolID = false;
+
+        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        String SQL = "SELECT * FROM booking where userID = " + ID;
+        rs = stmt.executeQuery(SQL);
+        //This will access the table
+        
+        System.out.println(ID);
+        
+        while (rs.next()){
+                int id_col = rs.getInt("ID");
+                int id_room = rs.getInt("roomID");
+                Date date = rs.getDate("date");
+                Time time = rs.getTime("time");
+
+                String bookid = Integer.toString(id_col);
+                String idRoom = Integer.toString(id_room);
+                               
+                Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String bookingDate = formatter.format(date);
+                formatter = new SimpleDateFormat("HH:mm:ss");
+                String bookingTime = formatter.format(time);
+                
+                
+                textID1.setText(bookid);
+                textDate.setText(bookingDate);
+                textTime.setText(bookingTime);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,14 +100,14 @@ public class myBookings extends javax.swing.JFrame {
         lblProjector = new javax.swing.JLabel();
         chkProj = new javax.swing.JCheckBox();
         btnLoginScreen = new javax.swing.JButton();
-        textID = new javax.swing.JTextField();
+        textTime = new javax.swing.JTextField();
         lblType = new javax.swing.JLabel();
         lblCapacity = new javax.swing.JLabel();
         lblProjector1 = new javax.swing.JLabel();
         lblProjector2 = new javax.swing.JLabel();
-        cmbTime = new javax.swing.JComboBox<>();
-        datePicker = new org.jdesktop.swingx.JXDatePicker();
         btnNext1 = new javax.swing.JButton();
+        textID1 = new javax.swing.JTextField();
+        textDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,10 +156,10 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
-        textID.setEnabled(false);
-        textID.addActionListener(new java.awt.event.ActionListener() {
+        textTime.setEnabled(false);
+        textTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIDActionPerformed(evt);
+                textTimeActionPerformed(evt);
             }
         });
 
@@ -119,15 +171,24 @@ public class myBookings extends javax.swing.JFrame {
 
         lblProjector2.setText("Time");
 
-        cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00", " " }));
-        cmbTime.setEnabled(false);
-
-        datePicker.setEditable(false);
-
         btnNext1.setText("Delete");
         btnNext1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNext1ActionPerformed(evt);
+            }
+        });
+
+        textID1.setEnabled(false);
+        textID1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textID1ActionPerformed(evt);
+            }
+        });
+
+        textDate.setEnabled(false);
+        textDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDateActionPerformed(evt);
             }
         });
 
@@ -138,54 +199,56 @@ public class myBookings extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(29, 29, 29)
-                                                .addComponent(lblType)
-                                                .addGap(27, 27, 27))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(lblCapacity)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(141, 141, 141)
-                                .addComponent(btnLoginScreen))
+                                .addContainerGap(46, Short.MAX_VALUE)
+                                .addComponent(lblType)
+                                .addGap(27, 27, 27))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblCapacity)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(141, 141, 141)
+                        .addComponent(btnLoginScreen))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
+                                .addGap(8, 8, 8)
+                                .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblProjector1)
-                                    .addComponent(lblProjector))
+                                    .addComponent(lblProjector)
+                                    .addComponent(lblProjector1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(chkProj)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(50, 50, 50)
+                                        .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblProjector2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textTime, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(217, 217, 217)
                 .addComponent(btnNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(27, 27, 27)
+                    .addComponent(textID1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(493, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +259,7 @@ public class myBookings extends javax.swing.JFrame {
                         .addComponent(btnLoginScreen)
                         .addGap(161, 161, 161))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblType)
                             .addComponent(jCmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,18 +271,13 @@ public class myBookings extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkProj)
                             .addComponent(lblProjector))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblProjector1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblProjector2)
-                            .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProjector1)
+                    .addComponent(lblProjector2)
+                    .addComponent(textTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNext)
@@ -232,6 +288,11 @@ public class myBookings extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNext1)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(71, 71, 71)
+                    .addComponent(textID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(263, Short.MAX_VALUE)))
         );
 
         pack();
@@ -278,13 +339,21 @@ public class myBookings extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLoginScreenActionPerformed
 
-    private void textIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDActionPerformed
+    private void textTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTimeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIDActionPerformed
+    }//GEN-LAST:event_textTimeActionPerformed
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNext1ActionPerformed
+
+    private void textDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textDateActionPerformed
+
+    private void textID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textID1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textID1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -295,8 +364,6 @@ public class myBookings extends javax.swing.JFrame {
     private javax.swing.JButton btnNext1;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JCheckBox chkProj;
-    private javax.swing.JComboBox<String> cmbTime;
-    private org.jdesktop.swingx.JXDatePicker datePicker;
     private javax.swing.JComboBox<String> jCmbType;
     private javax.swing.JLabel lblCapacity;
     private javax.swing.JLabel lblProjector;
@@ -304,6 +371,8 @@ public class myBookings extends javax.swing.JFrame {
     private javax.swing.JLabel lblProjector2;
     private javax.swing.JLabel lblType;
     private javax.swing.JSpinner spnCap;
-    private javax.swing.JTextField textID;
+    private javax.swing.JTextField textDate;
+    private javax.swing.JTextField textID1;
+    private javax.swing.JTextField textTime;
     // End of variables declaration//GEN-END:variables
 }
