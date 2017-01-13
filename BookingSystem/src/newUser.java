@@ -203,8 +203,8 @@ public class newUser extends javax.swing.JFrame {
             rs.updateString("Password", password);
             rs.updateString("edit_authorisation", "u");
             rs.insertRow();
-
-            JOptionPane.showMessageDialog(this, "Record Saved");
+           
+            JOptionPane.showMessageDialog(this, ("Record Saved \n\n  Name: " + first + " " + last + "\n Password: " + password));
             
             stmt.close();
             rs.close();

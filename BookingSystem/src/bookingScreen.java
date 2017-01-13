@@ -237,7 +237,7 @@ public class bookingScreen extends javax.swing.JFrame {
         try {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL;
-            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE room.projector = 0 AND room.capacity <= 21 AND !(booking.date = \"2016-11-16\" AND booking.time = \"9:00:00\")");
+            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = 0 AND room.capacity <= 21 AND (booking.date <> \"2016-11-16\" AND booking.time <> \"9:00:00\"))");
             //Need way to check if room us taken at time
             
             
