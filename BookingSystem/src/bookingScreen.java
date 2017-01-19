@@ -1,12 +1,13 @@
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -44,6 +45,18 @@ public class bookingScreen extends javax.swing.JFrame {
 
         userID = ID;
         authorisation = author;
+        
+        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        String SQL = "SELECT * FROM booking" ;
+        rs = stmt.executeQuery(SQL);
+        //This will access the table
+        
+         try {
+            rs.last();
+            ID = rs.getInt("ID") + 1;
+        }
+         catch (SQLException ex) {
+         }
         
         initComponents();
     }
@@ -306,7 +319,16 @@ public class bookingScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_datePickerActionPerformed
 
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
-        // TODO add your handling code here:
+        
+        if (datePicker.getDate() != null){
+            SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
+            formater.format(datePicker.getDate());
+            System.out.println(formater.format(datePicker.getDate()));
+        }
+        else{
+            JOptionPane.showMessageDialog(bookingScreen.this, "Enter a date");
+        }
+        
     }//GEN-LAST:event_btnBookActionPerformed
 
 

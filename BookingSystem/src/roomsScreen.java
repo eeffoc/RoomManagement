@@ -577,11 +577,10 @@ public final class roomsScreen extends javax.swing.JFrame {
             rs.updateInt("capacity", capacity);
             rs.updateBoolean("projector", projector);
             rs.insertRow();
-
-            //Close the database
+            
             stmt.close();
             rs.close();
-
+            
             //Reconnect to the database
             con = DriverManager.getConnection(host, uName, uPass);
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
