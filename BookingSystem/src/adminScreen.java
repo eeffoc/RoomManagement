@@ -13,12 +13,11 @@ import javax.swing.JOptionPane;
  */
 public final class adminScreen extends javax.swing.JFrame {
 
-    String host;        
-    String uName;       
-    String uPass;       
+        
 
-    Connection con;     
-    Statement stmt;      
+     databaseConnect connection;
+        
+        
     ResultSet rs;       
     int curRow = 0;     
     int userID;     
@@ -31,11 +30,8 @@ public final class adminScreen extends javax.swing.JFrame {
      */
     public adminScreen(int tempID) throws SQLException {
 
-        host = "jdbc:mysql://localhost/bookingsystem";
-        uName = "root";
-        uPass = "";
-        con = DriverManager.getConnection(host, uName, uPass);
-        //Connects to the database        
+       connection = new databaseConnect();
+        ResultSet rs;
         
         userID = tempID;
 
@@ -51,15 +47,15 @@ public final class adminScreen extends javax.swing.JFrame {
      * table will get all users from the user table, and stop when it has found
      * the current user.
      *
-     * @throws SQLException wlll identify an SQL error if/when one occurs
+     * @throws SQLException will identify an SQL error if/when one occurs
      */
     @SuppressWarnings("empty-statement")
     public void DoConnect() throws SQLException {
 
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM user";
-        rs = stmt.executeQuery(SQL);
+        connection.getUsers();
         //This will access the table
+        
+        rs = connection.getRS();
 
         while (rs.next()) {      //Loop while there is data to search
 
@@ -448,14 +444,11 @@ public final class adminScreen extends javax.swing.JFrame {
             rs.deleteRow();     //Delete the current row
 
             //Close the database
-            stmt.close();
-            rs.close();
+            connection.closeConnection();
 
             //Reopen the database
-            con = DriverManager.getConnection(host, uName, uPass);
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM user";
-            rs = stmt.executeQuery(SQL);
+            connection.getUsers();
+            rs = connection.getRS();
             //This will access the table
 
             // Get record set details
@@ -546,14 +539,11 @@ public final class adminScreen extends javax.swing.JFrame {
             rs.insertRow();
 
             //Close the database
-            stmt.close();
-            rs.close();
+            connection.closeConnection();
 
             //Reconnect to the database
-            con = DriverManager.getConnection(host, uName, uPass);
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM user";
-            rs = stmt.executeQuery(SQL);
+            connection.getUsers();
+            rs = connection.getRS();
             //This will access the table
 
             //Get recordset details

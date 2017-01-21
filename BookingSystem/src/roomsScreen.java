@@ -13,12 +13,7 @@ import javax.swing.JOptionPane;
  */
 public final class roomsScreen extends javax.swing.JFrame {
 
-    String host;        // A string to store where the database is
-    String uName;       // A string to store the default user to access the database
-    String uPass;       // A string to store the default password to access the database
-
-    Connection con;     // A connection variable to refer to the database connection made
-    Statement stmt;     // A statement to store the SQL being run in the database 
+    databaseConnect connection;
     ResultSet rs;       // A resultSet which stores the results of a run query
     int curRow = 0;     // An integer to store the row the user is currently in
     int userID;     //An interger to store the users ID         
@@ -31,10 +26,7 @@ public final class roomsScreen extends javax.swing.JFrame {
     public roomsScreen(int tempID) throws SQLException {
 
         // Connecting to a set database and storing that connection in connection con for reference.
-        host = "jdbc:mysql://localhost/bookingsystem";
-        uName = "root";
-        uPass = "";
-        con = DriverManager.getConnection(host, uName, uPass);
+        connection = new databaseConnect();
 
         // Storing userID for reference
         userID = tempID;
@@ -56,11 +48,8 @@ public final class roomsScreen extends javax.swing.JFrame {
     @SuppressWarnings("empty-statement")
     public void DoConnect() throws SQLException {
 
-        //Runs SQL statement on the database
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM room";
-        rs = stmt.executeQuery(SQL);
-        //This will access the table
+        connection.getRooms();
+        rs = connection.getRS();
 
         while (rs.next()) {      //Loop while there is data to search
 
@@ -461,15 +450,8 @@ public final class roomsScreen extends javax.swing.JFrame {
             rs.deleteRow();     //Delete the current row
 
             //Close the database
-            stmt.close();
-            rs.close();
-
-            //Reopen the database
-            con = DriverManager.getConnection(host, uName, uPass);
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM room";
-            rs = stmt.executeQuery(SQL);
-            //This will access the table
+            connection.closeConnection();
+            connection.getRooms();
 
             int typeIndex;
             
@@ -588,15 +570,8 @@ public final class roomsScreen extends javax.swing.JFrame {
             rs.updateBoolean("projector", projector);
             rs.insertRow();
             
-            stmt.close();
-            rs.close();
-            
-            //Reconnect to the database
-            con = DriverManager.getConnection(host, uName, uPass);
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM room";
-            rs = stmt.executeQuery(SQL);
-            //This will access the table
+            connection.closeConnection();
+            connection.getRooms();
 
             //Get recordset details
             rs.next();

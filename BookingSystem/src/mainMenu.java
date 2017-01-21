@@ -23,13 +23,6 @@ public class mainMenu extends javax.swing.JFrame {
      * Creates new form mainMenu
      */
     
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
-    ResultSet rs;
     int curRow = 0;
     int userID;
     
@@ -142,9 +135,7 @@ public class mainMenu extends javax.swing.JFrame {
 
         try {
             new loginScreen().setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
          this.dispose();

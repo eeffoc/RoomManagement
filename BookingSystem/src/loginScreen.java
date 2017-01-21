@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,41 +15,20 @@ import javax.swing.JOptionPane;
  */
 public class loginScreen extends javax.swing.JFrame {
 
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
-    ResultSet rs;
-
+    databaseConnect connection;
+            
     /**
-     * Creates new form admin
-     * @throws java.lang.ClassNotFoundException 
+     * Creates new form admin 
      * @throws java.sql.SQLException will identify an SQL error if/when one occurs
      */
-    public loginScreen() throws ClassNotFoundException, SQLException {
+    public loginScreen() throws SQLException {
 
-        initComponents();
-        doConnect();
+        connection = new databaseConnect();     
         
-    }
-    
-    private void doConnect() throws ClassNotFoundException, SQLException {
-
-        Class.forName("com.mysql.jdbc.Driver");
-
-        host = "jdbc:mysql://localhost/bookingsystem";
-        uName = "root";
-        uPass = "";
-
-        Connection con = DriverManager.getConnection(host, uName, uPass);
-        //This chunk accesses the database
-
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM user";
-        rs = stmt.executeQuery(SQL);
-        //This will access the table
+        initComponents();
+        
+        connection.getUsers();
+        
     }
 
     /**
@@ -137,6 +113,9 @@ public class loginScreen extends javax.swing.JFrame {
 
         boolean boolID = false;
 
+               
+        ResultSet rs = connection.getRS();
+        
         int adminID = (int) spnID.getValue();
         String password = (String) textPassword.getText();
         String authorisation = "u";
@@ -189,8 +168,7 @@ public class loginScreen extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(loginScreen.this, "Password incorrect");
 
-                stmt.close();
-                rs.close();
+                connection.closeConnection();
 
                 new loginScreen().setVisible(true);
                 this.dispose();
@@ -208,7 +186,7 @@ public class loginScreen extends javax.swing.JFrame {
     private void btnNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUserActionPerformed
         
         this.dispose();
-        try {
+        try {   
             new newUser().setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);

@@ -23,12 +23,8 @@ public class myBookings extends javax.swing.JFrame {
     /**
      * Creates new form myBookings
      */
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
+    
+    databaseConnect connection;
     ResultSet rs;
     int curRow = 0;
     int ID;
@@ -42,10 +38,7 @@ public class myBookings extends javax.swing.JFrame {
      */
     public myBookings(int userID, String authorisation) throws SQLException {
 
-        host = "jdbc:mysql://localhost/bookingsystem";
-        uName = "root";
-        uPass = "";
-        con = DriverManager.getConnection(host, uName, uPass);
+        connection = new databaseConnect();
 
         ID = userID;
         author = authorisation;
@@ -62,12 +55,9 @@ public class myBookings extends javax.swing.JFrame {
 
         boolean boolID = false;            
         
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM booking WHERE date >= CURDATE() and userID = " + ID;
-        rs = stmt.executeQuery(SQL);
+        connection.searchBookings(ID);
+        rs = connection.getRS();
         //This will access the table
-
-        System.out.println(ID);
 
         while (rs.next()) {
 
@@ -89,11 +79,11 @@ public class myBookings extends javax.swing.JFrame {
         btnFirst = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
-        jCmbType = new javax.swing.JComboBox<>();
+        jCmbType = new javax.swing.JComboBox<String>();
         spnCap = new javax.swing.JSpinner();
         lblProjector = new javax.swing.JLabel();
         chkProj = new javax.swing.JCheckBox();
-        btnLoginScreen = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         textTime = new javax.swing.JTextField();
         lblType = new javax.swing.JLabel();
         lblCapacity = new javax.swing.JLabel();
@@ -133,20 +123,20 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
-        jCmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Board room", "Training room" }));
+        jCmbType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Board room", "Training room" }));
         jCmbType.setEnabled(false);
 
-        spnCap.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spnCap.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         spnCap.setEnabled(false);
 
         lblProjector.setText("Projector");
 
         chkProj.setEnabled(false);
 
-        btnLoginScreen.setText("Back to menu");
-        btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back to menu");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginScreenActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
 
@@ -205,7 +195,7 @@ public class myBookings extends javax.swing.JFrame {
                             .addComponent(jCmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(141, 141, 141)
-                        .addComponent(btnLoginScreen))
+                        .addComponent(back))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -250,7 +240,7 @@ public class myBookings extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLoginScreen)
+                        .addComponent(back)
                         .addGap(161, 161, 161))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
@@ -368,7 +358,7 @@ public class myBookings extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLastActionPerformed
 
-    private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
 
         this.dispose();
 
@@ -386,7 +376,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_btnLoginScreenActionPerformed
+    }//GEN-LAST:event_backActionPerformed
 
     private void textTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTimeActionPerformed
         // TODO add your handling code here:
@@ -399,15 +389,8 @@ public class myBookings extends javax.swing.JFrame {
             rs.deleteRow();     //Delete the current row
 
             //Close the database
-            stmt.close();
-            rs.close();
-
-            //Reopen the database
-            con = DriverManager.getConnection(host, uName, uPass);
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM booking where userID = " + ID;
-            rs = stmt.executeQuery(SQL);
-            //This will access the table
+            connection.closeConnection();
+            connection.searchBookings(ID);
 
             JOptionPane.showMessageDialog(this, "Record Deleted");
 
@@ -442,7 +425,9 @@ public class myBookings extends javax.swing.JFrame {
     }//GEN-LAST:event_textID1ActionPerformed
 
     private void getRecordDetails() throws SQLException {
-
+        
+        rs = connection.getRS();
+        
         int id_col = rs.getInt("ID");
         int id_room = rs.getInt("roomID");
         Date date = rs.getDate("date");
@@ -464,10 +449,10 @@ public class myBookings extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
-    private javax.swing.JButton btnLoginScreen;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JCheckBox chkProj;

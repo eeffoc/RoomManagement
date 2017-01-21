@@ -23,12 +23,6 @@ public class mainMenuAdmin extends javax.swing.JFrame {
      * Creates new form mainMenu
      */
     
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
     ResultSet rs;
     int curRow = 0;
     int userID;
@@ -41,8 +35,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public mainMenuAdmin( int tempID) throws SQLException {
-        
-        
+                
         userID = tempID;
         authorisation = "a";
         

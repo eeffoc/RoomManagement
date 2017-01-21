@@ -1,9 +1,6 @@
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,13 +19,8 @@ public class newUser extends javax.swing.JFrame {
     /**
      * Creates new form newUser
      */
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
-    ResultSet rs;
+        
+    databaseConnect connection;
 
     /**
      *
@@ -36,12 +28,10 @@ public class newUser extends javax.swing.JFrame {
      */
     public newUser() throws SQLException {
 
-        host = "jdbc:mysql://localhost/bookingsystem";
-        uName = "root";
-        uPass = "";
-        con = DriverManager.getConnection(host, uName, uPass);
-
+        connection = new databaseConnect();
+     
         initComponents();
+        
         DoConnect();
     }
 
@@ -49,23 +39,10 @@ public class newUser extends javax.swing.JFrame {
      *
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public void DoConnect() throws SQLException {
-
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM user";
-        rs = stmt.executeQuery(SQL);
+    public void DoConnect() throws SQLException {    
         
-        int ID = 1;
+        int ID = connection.newUser();        
         
-        try {
-            rs.last();
-            ID = rs.getInt("ID") + 1;
-        }
-         catch (SQLException ex) {
-         }
-        
-       
-
         textID.setText(Integer.toString(ID));
         textFirstName.setText("");
         textLastName.setText("");
@@ -200,7 +177,8 @@ public class newUser extends javax.swing.JFrame {
         String password = jPassword.getText();
 
         int newID = Integer.parseInt(ID);
-
+        ResultSet rs = connection.getRS();
+        
         try {
 
             rs.moveToInsertRow();
@@ -214,8 +192,8 @@ public class newUser extends javax.swing.JFrame {
            
             JOptionPane.showMessageDialog(this, ("Record Saved \n\n  Name: " + first + " " + last + "\n Password: " + password));
             
-            stmt.close();
-            rs.close();
+            connection.closeConnection();
+            
         } catch (SQLException ex) {
             Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
         }
