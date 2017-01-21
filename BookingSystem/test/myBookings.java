@@ -34,12 +34,6 @@ public class myBookings extends javax.swing.JFrame {
     int ID;
     String author;
 
-    /**
-     *
-     * @param userID temporarily holds user ID until moved to a global variable
-     * @param authorisation temporarily holds user authorization until moved to a global variable
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
     public myBookings(int userID, String authorisation) throws SQLException {
 
         host = "jdbc:mysql://localhost/bookingsystem";
@@ -54,10 +48,6 @@ public class myBookings extends javax.swing.JFrame {
         DoConnect();
     }
 
-    /**
-     *
-     * @throws SQLException wlll identify an SQL error if/when one occurs
-     */
     public void DoConnect() throws SQLException {
 
         boolean boolID = false;            

@@ -10,13 +10,18 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
- * The screen for searching and making bookings with rooms on the database
  *
  * @author Christopher
  */
 public class bookingScreen extends javax.swing.JFrame {
-
+    
     String host;
     String uName;
     String uPass;
@@ -27,39 +32,32 @@ public class bookingScreen extends javax.swing.JFrame {
 
     int userID;
     String authorisation;
-
+    
     /**
      * Creates new form bookingScreen
-     *
-     * @param ID Will hold the user ID temporarily until stored on the global
-     * variable
-     * @param author Will hold the user authorization temporarily until stored
-     * on the global variable
-     *
-     * @throws SQLException will identify an SQL error if/when one occurs
      */
     public bookingScreen(int ID, String author) throws SQLException {
-
+        
         host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
-        // access the database
-        
+
         userID = ID;
         authorisation = author;
-
+        
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM booking";
+        String SQL = "SELECT * FROM booking" ;
         rs = stmt.executeQuery(SQL);
         //This will access the table
-
-        try {
+        
+         try {
             rs.last();
             ID = rs.getInt("ID") + 1;
-        } catch (SQLException ex) {
         }
-
+         catch (SQLException ex) {
+         }
+        
         initComponents();
     }
 
@@ -239,6 +237,7 @@ public class bookingScreen extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
         //fix
+
         DefaultTableModel model = (DefaultTableModel) roomsAvailable.getModel();
 
         model.setRowCount(0);
@@ -247,13 +246,14 @@ public class bookingScreen extends javax.swing.JFrame {
         boolean projector = checkProjector.isSelected();
 
         JComboBox<String> bookingTime = cmbTime;
-
+       
         try {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL;
             SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = 0 AND room.capacity <= 21 AND (booking.date <> \"2016-11-16\" AND booking.time <> \"9:00:00\"))");
             //Need way to check if room us taken at time
-
+            
+            
             /*
                 SELECT * FROM room
                 JOIN bookings
@@ -262,11 +262,13 @@ public class bookingScreen extends javax.swing.JFrame {
                 AND room.capacity <= 20
                 AND !(bookings.date = "2016-11-16" AND bookings.time = "10:00:00")
              */
+            
             rs = stmt.executeQuery(SQL);
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+           
+        
         try {
             while (rs.next()) {
 
@@ -287,7 +289,7 @@ public class bookingScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -295,20 +297,21 @@ public class bookingScreen extends javax.swing.JFrame {
 
         this.dispose();
 
-        if (authorisation.equals("a")) {
+        if (authorisation.equals("a")){
             try {
                 new mainMenuAdmin(userID).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        }
+        else{
             try {
                 new mainMenu(userID).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+            
     }//GEN-LAST:event_btnLoginScreenActionPerformed
 
     private void datePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerActionPerformed
@@ -316,15 +319,16 @@ public class bookingScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_datePickerActionPerformed
 
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
-
-        if (datePicker.getDate() != null) {
+        
+        if (datePicker.getDate() != null){
             SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
             formater.format(datePicker.getDate());
             System.out.println(formater.format(datePicker.getDate()));
-        } else {
+        }
+        else{
             JOptionPane.showMessageDialog(bookingScreen.this, "Enter a date");
         }
-
+        
     }//GEN-LAST:event_btnBookActionPerformed
 
 

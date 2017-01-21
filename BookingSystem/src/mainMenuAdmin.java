@@ -35,7 +35,13 @@ public class mainMenuAdmin extends javax.swing.JFrame {
     
     String authorisation;
     
+    /**
+     *
+     * @param tempID temporarily holds the user ID until moved to a global variable
+     * @throws SQLException will identify an SQL error if/when one occurs
+     */
     public mainMenuAdmin( int tempID) throws SQLException {
+        
         
         userID = tempID;
         authorisation = "a";
@@ -139,6 +145,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
          
         try {
             new adminScreen(userID).setVisible(true);
+            System.out.println("Yes");
         } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -173,8 +180,12 @@ public class mainMenuAdmin extends javax.swing.JFrame {
 
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
 
-        new myBookings(userID, authorisation).setVisible(true);
-        this.dispose();
+        try {
+            new myBookings(userID, authorisation).setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnUserScreen1ActionPerformed
 

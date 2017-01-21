@@ -30,10 +30,6 @@ public class newUser extends javax.swing.JFrame {
     Statement stmt;
     ResultSet rs;
 
-    /**
-     *
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
     public newUser() throws SQLException {
 
         host = "jdbc:mysql://localhost/bookingsystem";
@@ -45,10 +41,6 @@ public class newUser extends javax.swing.JFrame {
         DoConnect();
     }
 
-    /**
-     *
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
     public void DoConnect() throws SQLException {
 
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);

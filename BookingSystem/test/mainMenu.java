@@ -35,11 +35,6 @@ public class mainMenu extends javax.swing.JFrame {
     
     String authorisation;
     
-    /**
-     *
-     * @param tempID - temporarily holds tempID until moved to global variable
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
     public mainMenu(int tempID) throws SQLException {
         
         userID = tempID;
@@ -153,11 +148,7 @@ public class mainMenu extends javax.swing.JFrame {
 
     private void btnUserScreen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreen1ActionPerformed
         
-        try {
-            new myBookings(userID, authorisation).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new myBookings(userID, authorisation).setVisible(true);
         this.dispose();
             
     }//GEN-LAST:event_btnUserScreen1ActionPerformed

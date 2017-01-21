@@ -23,11 +23,6 @@ public final class roomsScreen extends javax.swing.JFrame {
     int curRow = 0;     // An integer to store the row the user is currently in
     int userID;     //An interger to store the users ID         
 
-    /**
-     *
-     * @param tempID temporarily stores the variable until moved to a global variable
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
     public roomsScreen(int tempID) throws SQLException {
 
         // Connecting to a set database and storing that connection in connection con for reference.
@@ -48,11 +43,6 @@ public final class roomsScreen extends javax.swing.JFrame {
     }
 
     //Runs the sql statemtn to collect user details, and then gets each ready to view.
-
-    /**
-     *
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
     @SuppressWarnings("empty-statement")
     public void DoConnect() throws SQLException {
 

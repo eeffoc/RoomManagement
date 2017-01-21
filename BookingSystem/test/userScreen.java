@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To   change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -7,11 +12,9 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Christopher
- *
- *
  */
 public class userScreen extends javax.swing.JFrame {
-    
+
     String host;
     String uName;
     String uPass;
@@ -19,18 +22,14 @@ public class userScreen extends javax.swing.JFrame {
     Connection con;
     Statement stmt;
     ResultSet rs;
+    int curRow = 0;
     int userID;
-    String authorisation = "";
-
+    String authorisation = "";    
     /**
      * Creates new form Workers
-     * @param tempID - temporarily holds the user ID
-     * @throws SQLException will identify an SQL error if/when one occurs
      */
     public userScreen(int tempID) throws SQLException {
 
-       
-        
         host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
@@ -38,15 +37,10 @@ public class userScreen extends javax.swing.JFrame {
         userID = tempID;
 
         initComponents();
-        DoConnect();
-
+        DoConnect();       
+        
     }
-    
-    /**
-    * Connects to the user table in the database, only get results for where
-    * the ID is equal to the user ID.
-    * @throws SQLException will identify an SQL error if/when one occurs
-    */
+
     @SuppressWarnings("empty-statement")
     public void DoConnect() throws SQLException {
 
@@ -56,16 +50,16 @@ public class userScreen extends javax.swing.JFrame {
         String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
         //This will access the table
-
-        while (rs.next()) {
-
+        
+        while (rs.next()){
+            
             if (rs.getInt("ID") == userID && !boolID) {
-
+                
                 int id_col = rs.getInt("ID");
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 authorisation = rs.getString("edit_authorisation");
-
+                
                 System.out.println(rs.getString("edit_authorisation"));
 
                 String id = Integer.toString(id_col);

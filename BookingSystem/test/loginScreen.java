@@ -28,8 +28,6 @@ public class loginScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form admin
-     * @throws java.lang.ClassNotFoundException 
-     * @throws java.sql.SQLException will identify an SQL error if/when one occurs
      */
     public loginScreen() throws ClassNotFoundException, SQLException {
 

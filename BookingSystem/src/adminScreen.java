@@ -5,48 +5,57 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * The class will create an interface for the user. In this interface, the admin
- * can view all users on the system and edit their details if it is required.
- * The admin can also add new users on the system.
+ * In this interface, the admin can view all users on the system and edit their
+ * details if it is required while also being able to add new users on the
+ * system.
  *
  * @author Christopher
  */
 public final class adminScreen extends javax.swing.JFrame {
 
-    String host;        // A string to store where the database is
-    String uName;       // A string to store the default user to access the database
-    String uPass;       // A string to store the default password to access the database
+    String host;        
+    String uName;       
+    String uPass;       
 
-    Connection con;     // A connection variable to refer to the database connection made
-    Statement stmt;     // A statement to store the SQL being run in the database 
-    ResultSet rs;       // A resultSet which stores the results of a run query
-    int curRow = 0;     // An integer to store the row the user is currently in
-    int userID;     //An interger to store the users ID         
-
+    Connection con;     
+    Statement stmt;      
+    ResultSet rs;       
+    int curRow = 0;     
+    int userID;     
+    
+    /**
+     *
+     * @param tempID stores the ID temporarily, until passed to the global
+     * variable
+     * @throws SQLException will identify an SQL error if/when one occurs
+     */
     public adminScreen(int tempID) throws SQLException {
 
-        // Connecting to a set database and storing that connection in connection con for reference.
         host = "jdbc:mysql://localhost/bookingsystem";
         uName = "root";
         uPass = "";
         con = DriverManager.getConnection(host, uName, uPass);
-
-        // Storing userID for reference
+        //Connects to the database        
+        
         userID = tempID;
 
-        // Making the interface visible to users
         initComponents();
 
-        //Connecting the system to the database, collecting all the user data through the query
         DoConnect();
 
     }
 
     //Runs the sql statemtn to collect user details, and then gets each ready to view.
+    /**
+     * Runs the selected SQL statement on the database, which in this case, the
+     * table will get all users from the user table, and stop when it has found
+     * the current user.
+     *
+     * @throws SQLException wlll identify an SQL error if/when one occurs
+     */
     @SuppressWarnings("empty-statement")
     public void DoConnect() throws SQLException {
 
-        //Runs SQL statement on the database
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
@@ -73,6 +82,11 @@ public final class adminScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Will get the requested data of the from the record set of the database.
+     *
+     * @throws SQLException
+     */
     private void getRecordDetails() throws SQLException {
 
         //Get the  recordsets details
@@ -82,7 +96,7 @@ public final class adminScreen extends javax.swing.JFrame {
         String last_name = rs.getString("Last_Name");
         String setAuthorisation = rs.getString("edit_authorisation");
 
-        //Put the first recordsets details on the screen
+        //Put the first recordsets details on the screens
         textID.setText(id);
         textFirstName.setText(first_name);
         textLastName.setText(last_name);
@@ -112,7 +126,7 @@ public final class adminScreen extends javax.swing.JFrame {
         btnNewRecord = new javax.swing.JButton();
         btnSaveRecord = new javax.swing.JButton();
         btnCancelRecord = new javax.swing.JButton();
-        btnLoginScreen = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
         jPassword = new javax.swing.JPasswordField();
         lblPassword1 = new javax.swing.JLabel();
@@ -200,10 +214,10 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
-        btnLoginScreen.setText("Back to menu");
-        btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back to menu");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginScreenActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
 
@@ -226,7 +240,7 @@ public final class adminScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLoginScreen))
+                        .addComponent(back))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,7 +288,7 @@ public final class adminScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnLoginScreen)
+                .addComponent(back)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +331,12 @@ public final class adminScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFirstNameActionPerformed
 
-    //When the "first" button is pressed
+    /**
+     * When this method is triggered, the system will move to the first on the
+     * record set
+     *
+     * @param evt - when the "first" button is pressed do this.
+     */
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
 
         try {
@@ -334,7 +353,12 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnFirstActionPerformed
 
-    //When the "next" button is pressed
+    /**
+     * When this method is triggered, the system will move to the next data on
+     * the record set
+     *
+     * @param evt - when the "next" button is pressed do this.
+     */
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
 
         try {
@@ -357,7 +381,6 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNextActionPerformed
 
-    //When the "previous" button is pressed
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
 
         try {
@@ -379,13 +402,12 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPreviousActionPerformed
 
-     //When the "last" button is pressed
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
 
         try {
 
             rs.last();      // Go to the last record in the table
-            
+
             getRecordDetails();
 
         } catch (SQLException err) {
@@ -396,7 +418,6 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLastActionPerformed
 
-     //When the "update" button is pressed
     private void btnUpdateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRecordActionPerformed
 
         //Temporary Strings to hold the updated user details
@@ -414,22 +435,20 @@ public final class adminScreen extends javax.swing.JFrame {
             rs.updateString("edit_authorisation", setAuthorisation);
             rs.updateRow();
             JOptionPane.showMessageDialog(adminScreen.this, "Updated");
-        }
-        catch (SQLException err) {
+        } catch (SQLException err) {
             System.out.println(err.getMessage());
         }
 
     }//GEN-LAST:event_btnUpdateRecordActionPerformed
 
-     //When the "delete" button is pressed
     private void btnDeleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRecordActionPerformed
 
         try {
 
             rs.deleteRow();     //Delete the current row
-  
+
             //Close the database
-            stmt.close();     
+            stmt.close();
             rs.close();
 
             //Reopen the database
@@ -473,8 +492,7 @@ public final class adminScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnDeleteRecordActionPerformed
-
-     //When the "new record" button is pressed
+  
     private void btnNewRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewRecordActionPerformed
 
         // Make relevant buttons clickable
@@ -505,7 +523,6 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNewRecordActionPerformed
 
-    //When the "save" button is pressed
     private void btnSaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRecordActionPerformed
 
         // Store all entered data into temporary varialbes
@@ -516,13 +533,12 @@ public final class adminScreen extends javax.swing.JFrame {
         String password = jPassword.getText();
         String setAuthorisation = textAuthorisation.getText();
 
-
         try {
 
             rs.moveToInsertRow();   //Move to the end of record set
 
             //Update recordset with the new record
-            rs.updateInt("ID", newID);      
+            rs.updateInt("ID", newID);
             rs.updateString("First_Name", first);
             rs.updateString("Last_Name", last);
             rs.updateString("Password", password);
@@ -552,7 +568,7 @@ public final class adminScreen extends javax.swing.JFrame {
             textID.setText(id);
             textFirstName.setText(first_name2);
             textLastName.setText(last_name2);
-            
+
             //Set necessary buttons to clickable
             btnFirst.setEnabled(true);
             btnPrevious.setEnabled(true);
@@ -574,6 +590,13 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSaveRecordActionPerformed
 
+    /**
+     *
+     * When this method is triggered, the system will remove data from the forms
+     * and display the last view data from the record set
+     *
+     * @param evt - when the "cancel record" button is pressed do this.
+     */
     private void btnCancelRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelRecordActionPerformed
 
         //Set relevant buttons to clickable
@@ -590,7 +613,7 @@ public final class adminScreen extends javax.swing.JFrame {
 
         try {
             //Go back to the last viewed record and show the details of last viewed record
-            rs.absolute(curRow);    
+            rs.absolute(curRow);
             textFirstName.setText(rs.getString("First_Name"));
             textLastName.setText(rs.getString("Last_Name"));
             textID.setText(Integer.toString(rs.getInt("ID")));
@@ -601,7 +624,7 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCancelRecordActionPerformed
 
-    private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
 
         try {
             this.dispose();     //Close the current screen
@@ -610,18 +633,18 @@ public final class adminScreen extends javax.swing.JFrame {
             Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_btnLoginScreenActionPerformed
+    }//GEN-LAST:event_backActionPerformed
 
     private void textAuthorisationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textAuthorisationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textAuthorisationActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JButton btnCancelRecord;
     private javax.swing.JButton btnDeleteRecord;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
-    private javax.swing.JButton btnLoginScreen;
     private javax.swing.JButton btnNewRecord;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
