@@ -20,7 +20,7 @@ public final class adminScreen extends javax.swing.JFrame {
         
     ResultSet rs;       
     int curRow = 0;     
-    int userID;     
+    String userID;     
     
     /**
      *
@@ -28,7 +28,7 @@ public final class adminScreen extends javax.swing.JFrame {
      * variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public adminScreen(int tempID) throws SQLException {
+    public adminScreen(String tempID) throws SQLException {
 
        connection = new databaseConnect();
         ResultSet rs;
@@ -59,11 +59,10 @@ public final class adminScreen extends javax.swing.JFrame {
 
         while (rs.next()) {      //Loop while there is data to search
 
-            if (rs.getInt("ID") == userID) {     // If the id is equal to the user ID
+            if (rs.getString("ID").equals(userID)) {     // If the id is equal to the user ID
 
                 //Get the users details from the database
-                int id_col = rs.getInt("ID");
-                String id = Integer.toString(id_col);
+                String id = rs.getString("ID");
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String setAuthorisation = rs.getString("edit_authorisation");
@@ -86,8 +85,7 @@ public final class adminScreen extends javax.swing.JFrame {
     private void getRecordDetails() throws SQLException {
 
         //Get the  recordsets details
-        int id_col = rs.getInt("ID");
-        String id = Integer.toString(id_col);
+        String id = rs.getString("ID");
         String first_name = rs.getString("First_Name");
         String last_name = rs.getString("Last_Name");
         String setAuthorisation = rs.getString("edit_authorisation");
@@ -138,7 +136,6 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
-        textID.setEnabled(false);
         textID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textIDActionPerformed(evt);
@@ -246,10 +243,10 @@ public final class adminScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,11 +418,10 @@ public final class adminScreen extends javax.swing.JFrame {
         String last = textLastName.getText();
         String ID = textID.getText();
         String setAuthorisation = textAuthorisation.getText();
-        int newID = Integer.parseInt(ID);
-
+        
         try {
             //Update the recordset in the database
-            rs.updateInt("ID", newID);
+            rs.updateString("ID", ID);
             rs.updateString("First_Name", first);
             rs.updateString("last_Name", last);
             rs.updateString("edit_authorisation", setAuthorisation);
@@ -453,12 +449,10 @@ public final class adminScreen extends javax.swing.JFrame {
 
             // Get record set details
             rs.next();
-            int id_col = rs.getInt("ID");
+            String id = rs.getString("ID");
             String first_name = rs.getString("first_name");
             String last_name = rs.getString("last_name");
             String setAuthorisation = rs.getString("edit_authorisation");
-
-            String id = Integer.toString(id_col);
 
             // Put recordset details to the screen
             textID.setText(id);
@@ -501,10 +495,6 @@ public final class adminScreen extends javax.swing.JFrame {
         btnCancelRecord.setEnabled(true);
 
         try {
-            rs.last();      // Go to last user iin recordset
-            int ID = rs.getInt("ID") + 1;       // Get the ID and add one to it
-
-            textID.setText(Integer.toString(ID));       // Covert the ID to a string
 
             curRow = rs.getRow();       //Set the current row to the row moved to
             textFirstName.setText("");      //Set the text of
@@ -522,7 +512,6 @@ public final class adminScreen extends javax.swing.JFrame {
         String first = textFirstName.getText();
         String last = textLastName.getText();
         String ID = textID.getText();
-        int newID = Integer.parseInt(ID);
         String password = jPassword.getText();
         String setAuthorisation = textAuthorisation.getText();
 
@@ -531,7 +520,7 @@ public final class adminScreen extends javax.swing.JFrame {
             rs.moveToInsertRow();   //Move to the end of record set
 
             //Update recordset with the new record
-            rs.updateInt("ID", newID);
+            rs.updateString("ID", ID);
             rs.updateString("First_Name", first);
             rs.updateString("Last_Name", last);
             rs.updateString("Password", password);
@@ -606,7 +595,7 @@ public final class adminScreen extends javax.swing.JFrame {
             rs.absolute(curRow);
             textFirstName.setText(rs.getString("First_Name"));
             textLastName.setText(rs.getString("Last_Name"));
-            textID.setText(Integer.toString(rs.getInt("ID")));
+            textID.setText(rs.getString("ID"));
             textAuthorisation.setText(rs.getString("edit_authorisation"));
         } catch (SQLException ex) {
 

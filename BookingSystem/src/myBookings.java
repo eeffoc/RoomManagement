@@ -27,7 +27,7 @@ public class myBookings extends javax.swing.JFrame {
     databaseConnect connection;
     ResultSet rs;
     int curRow = 0;
-    int ID;
+    String ID;
     String author;
 
     /**
@@ -36,7 +36,7 @@ public class myBookings extends javax.swing.JFrame {
      * @param authorisation temporarily holds user authorization until moved to a global variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public myBookings(int userID, String authorisation) throws SQLException {
+    public myBookings(String userID, String authorisation) throws SQLException {
 
         connection = new databaseConnect();
 
@@ -44,25 +44,23 @@ public class myBookings extends javax.swing.JFrame {
         author = authorisation;
 
         initComponents();
+        
         DoConnect();
     }
 
     /**
      *
-     * @throws SQLException wlll identify an SQL error if/when one occurs
+     * @throws SQLException will identify an SQL error if/when one occurs
      */
     public void DoConnect() throws SQLException {
 
         boolean boolID = false;            
+        connection.getMyBookings(ID);
         
-        connection.searchBookings(ID);
         rs = connection.getRS();
-        //This will access the table
-
-        while (rs.next()) {
-
+        
+        while (rs.next()){
             getRecordDetails();
-
         }
     }
 
@@ -79,7 +77,7 @@ public class myBookings extends javax.swing.JFrame {
         btnFirst = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
-        jCmbType = new javax.swing.JComboBox<String>();
+        jCmbType = new javax.swing.JComboBox<>();
         spnCap = new javax.swing.JSpinner();
         lblProjector = new javax.swing.JLabel();
         chkProj = new javax.swing.JCheckBox();
@@ -90,8 +88,9 @@ public class myBookings extends javax.swing.JFrame {
         lblProjector1 = new javax.swing.JLabel();
         lblProjector2 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
-        textID1 = new javax.swing.JTextField();
+        roomID = new javax.swing.JTextField();
         textDate = new javax.swing.JTextField();
+        lblType1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,10 +122,10 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
-        jCmbType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Board room", "Training room" }));
+        jCmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Board room", "Training room" }));
         jCmbType.setEnabled(false);
 
-        spnCap.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        spnCap.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         spnCap.setEnabled(false);
 
         lblProjector.setText("Projector");
@@ -162,10 +161,10 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
-        textID1.setEnabled(false);
-        textID1.addActionListener(new java.awt.event.ActionListener() {
+        roomID.setEnabled(false);
+        roomID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textID1ActionPerformed(evt);
+                roomIDActionPerformed(evt);
             }
         });
 
@@ -176,6 +175,8 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
+        lblType1.setText("Room");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,15 +186,14 @@ public class myBookings extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblType)
-                                .addGap(27, 27, 27))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblCapacity)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addComponent(lblType1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCapacity, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblType, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roomID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(141, 141, 141)
                         .addComponent(back))
                     .addGroup(layout.createSequentialGroup()
@@ -228,11 +228,6 @@ public class myBookings extends javax.swing.JFrame {
                 .addGap(217, 217, 217)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addComponent(textID1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(493, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +238,11 @@ public class myBookings extends javax.swing.JFrame {
                         .addComponent(back)
                         .addGap(161, 161, 161))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(roomID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblType1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblType)
                             .addComponent(jCmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,11 +271,6 @@ public class myBookings extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(71, 71, 71)
-                    .addComponent(textID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(263, Short.MAX_VALUE)))
         );
 
         pack();
@@ -366,7 +360,7 @@ public class myBookings extends javax.swing.JFrame {
             try {
                 new mainMenuAdmin(ID).setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(myBookings.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {
@@ -390,7 +384,7 @@ public class myBookings extends javax.swing.JFrame {
 
             //Close the database
             connection.closeConnection();
-            connection.searchBookings(ID);
+            connection.searchBookings();
 
             JOptionPane.showMessageDialog(this, "Record Deleted");
 
@@ -420,28 +414,25 @@ public class myBookings extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textDateActionPerformed
 
-    private void textID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textID1ActionPerformed
+    private void roomIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textID1ActionPerformed
+    }//GEN-LAST:event_roomIDActionPerformed
 
     private void getRecordDetails() throws SQLException {
+
         
-        rs = connection.getRS();
-        
-        int id_col = rs.getInt("ID");
         int id_room = rs.getInt("roomID");
         Date date = rs.getDate("date");
         Time time = rs.getTime("time");
 
-        String bookid = Integer.toString(id_col);
         String idRoom = Integer.toString(id_room);
 
+        roomID.setText(idRoom);
         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
         String bookingDate = formatter.format(date);
         formatter = new SimpleDateFormat("HH:mm:ss");
         String bookingTime = formatter.format(time);
 
-        textID1.setText(bookid);
         textDate.setText(bookingDate);
         textTime.setText(bookingTime);
 
@@ -462,9 +453,10 @@ public class myBookings extends javax.swing.JFrame {
     private javax.swing.JLabel lblProjector1;
     private javax.swing.JLabel lblProjector2;
     private javax.swing.JLabel lblType;
+    private javax.swing.JLabel lblType1;
+    private javax.swing.JTextField roomID;
     private javax.swing.JSpinner spnCap;
     private javax.swing.JTextField textDate;
-    private javax.swing.JTextField textID1;
     private javax.swing.JTextField textTime;
     // End of variables declaration//GEN-END:variables
 }

@@ -47,10 +47,10 @@
                       <Component id="btnLast" min="-2" pref="125" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="textID" min="-2" pref="51" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="textFirstName" min="-2" pref="201" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="textID" min="-2" pref="109" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="textFirstName" min="-2" pref="208" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="textLastName" pref="184" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -146,9 +146,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textID">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIDActionPerformed"/>
       </Events>

@@ -41,9 +41,8 @@ public class newUser extends javax.swing.JFrame {
      */
     public void DoConnect() throws SQLException {    
         
-        int ID = connection.newUser();        
         
-        textID.setText(Integer.toString(ID));
+        textID.setText("");
         textFirstName.setText("");
         textLastName.setText("");
         //This will access the table       
@@ -93,7 +92,6 @@ public class newUser extends javax.swing.JFrame {
             }
         });
 
-        textID.setEnabled(false);
         textID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textIDActionPerformed(evt);
@@ -112,7 +110,7 @@ public class newUser extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnSave)
@@ -139,7 +137,7 @@ public class newUser extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword1)
@@ -175,15 +173,13 @@ public class newUser extends javax.swing.JFrame {
         String last = textLastName.getText();
         String ID = textID.getText();
         String password = jPassword.getText();
-
-        int newID = Integer.parseInt(ID);
         ResultSet rs = connection.getRS();
         
         try {
 
             rs.moveToInsertRow();
 
-            rs.updateInt("ID", newID);
+            rs.updateString("ID", ID);
             rs.updateString("First_Name", first);
             rs.updateString("Last_Name", last);
             rs.updateString("Password", password);
@@ -202,8 +198,6 @@ public class newUser extends javax.swing.JFrame {
         
         try {
             new loginScreen().setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -216,8 +210,6 @@ public class newUser extends javax.swing.JFrame {
         
         try {
             new loginScreen().setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -16,14 +16,14 @@ public final class roomsScreen extends javax.swing.JFrame {
     databaseConnect connection;
     ResultSet rs;       // A resultSet which stores the results of a run query
     int curRow = 0;     // An integer to store the row the user is currently in
-    int userID;     //An interger to store the users ID         
+    String userID;     //An interger to store the users ID         
 
     /**
      *
      * @param tempID temporarily stores the variable until moved to a global variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public roomsScreen(int tempID) throws SQLException {
+    public roomsScreen(String tempID) throws SQLException {
 
         // Connecting to a set database and storing that connection in connection con for reference.
         connection = new databaseConnect();

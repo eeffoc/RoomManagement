@@ -24,7 +24,7 @@ public class mainMenu extends javax.swing.JFrame {
      */
     
     int curRow = 0;
-    int userID;
+    String userID;
     
     String authorisation;
     
@@ -33,7 +33,7 @@ public class mainMenu extends javax.swing.JFrame {
      * @param tempID - temporarily holds tempID until moved to global variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public mainMenu(int tempID) throws SQLException {
+    public mainMenu(String tempID) throws SQLException {
         
         userID = tempID;
         authorisation = "u";
@@ -135,7 +135,7 @@ public class mainMenu extends javax.swing.JFrame {
 
         try {
             new loginScreen().setVisible(true);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
          this.dispose();

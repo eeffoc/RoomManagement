@@ -25,7 +25,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
     
     ResultSet rs;
     int curRow = 0;
-    int userID;
+    String userID;
     
     String authorisation;
     
@@ -34,7 +34,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
      * @param tempID temporarily holds the user ID until moved to a global variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public mainMenuAdmin( int tempID) throws SQLException {
+    public mainMenuAdmin( String tempID) throws SQLException {
                 
         userID = tempID;
         authorisation = "a";
@@ -138,9 +138,8 @@ public class mainMenuAdmin extends javax.swing.JFrame {
          
         try {
             new adminScreen(userID).setVisible(true);
-            System.out.println("Yes");
         } catch (SQLException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
          
     }//GEN-LAST:event_btnUserScreenActionPerformed
@@ -149,8 +148,6 @@ public class mainMenuAdmin extends javax.swing.JFrame {
 
         try {
             new loginScreen().setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -162,10 +159,10 @@ public class mainMenuAdmin extends javax.swing.JFrame {
 
         try {
             new bookingScreen(userID, authorisation).setVisible(true);
-            this.dispose();
         } catch (SQLException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();
         
         
         
@@ -186,10 +183,10 @@ public class mainMenuAdmin extends javax.swing.JFrame {
         
         try {
             new roomsScreen(userID).setVisible(true);
-            this.dispose();
         } catch (SQLException ex) {
-            Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(mainMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();
         
     }//GEN-LAST:event_btnEditRoomsActionPerformed
 

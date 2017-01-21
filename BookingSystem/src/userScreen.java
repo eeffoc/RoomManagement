@@ -14,7 +14,7 @@ public class userScreen extends javax.swing.JFrame {
     
     databaseConnect connection;
     ResultSet rs;
-    int userID;
+    String userID;
     String authorisation = "";
 
     /**
@@ -22,7 +22,7 @@ public class userScreen extends javax.swing.JFrame {
      * @param tempID - temporarily holds the user ID
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public userScreen(int tempID) throws SQLException {
+    public userScreen(String tempID) throws SQLException {
 
         connection = new databaseConnect();
         userID = tempID;
@@ -47,16 +47,14 @@ public class userScreen extends javax.swing.JFrame {
 
         while (rs.next()) {
 
-            if (rs.getInt("ID") == userID && !boolID) {
+            if (rs.getString("ID").equals(userID) && !boolID) {
 
-                int id_col = rs.getInt("ID");
+                String id = rs.getString("ID");
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 authorisation = rs.getString("edit_authorisation");
 
                 System.out.println(rs.getString("edit_authorisation"));
-
-                String id = Integer.toString(id_col);
 
                 textID.setText(id);
                 textFirstName.setText(first_name);
@@ -95,7 +93,6 @@ public class userScreen extends javax.swing.JFrame {
             }
         });
 
-        textID.setEnabled(false);
         textID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textIDActionPerformed(evt);
@@ -126,16 +123,14 @@ public class userScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(348, 348, 348)
-                                .addComponent(btnLoginScreen))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(textLastName))))
+                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(197, 197, 197)
+                        .addComponent(btnLoginScreen))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textLastName))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblPassword)
                         .addGap(18, 18, 18)
@@ -148,12 +143,17 @@ public class userScreen extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnLoginScreen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnLoginScreen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

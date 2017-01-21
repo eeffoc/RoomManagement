@@ -17,15 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class bookingScreen extends javax.swing.JFrame {
 
-    String host;
-    String uName;
-    String uPass;
-
-    Connection con;
-    Statement stmt;
+    databaseConnect connection;
     ResultSet rs;
-
-    int userID;
+    String userID;
     String authorisation;
 
     /**
@@ -38,27 +32,13 @@ public class bookingScreen extends javax.swing.JFrame {
      *
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public bookingScreen(int ID, String author) throws SQLException {
+    public bookingScreen(String ID, String author) throws SQLException {
 
-        host = "jdbc:mysql://localhost/bookingsystem";
-        uName = "root";
-        uPass = "";
-        con = DriverManager.getConnection(host, uName, uPass);
+        connection = new databaseConnect();  
         // access the database
         
         userID = ID;
         authorisation = author;
-
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM booking";
-        rs = stmt.executeQuery(SQL);
-        //This will access the table
-
-        try {
-            rs.last();
-            ID = rs.getInt("ID") + 1;
-        } catch (SQLException ex) {
-        }
 
         initComponents();
     }
@@ -249,20 +229,8 @@ public class bookingScreen extends javax.swing.JFrame {
         JComboBox<String> bookingTime = cmbTime;
 
         try {
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL;
-            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = 0 AND room.capacity <= 21 AND (booking.date <> \"2016-11-16\" AND booking.time <> \"9:00:00\"))");
-            //Need way to check if room us taken at time
-
-            /*
-                SELECT * FROM room
-                JOIN bookings
-                ON bookings.roomID = room.id	
-                WHERE room.projector = 0
-                AND room.capacity <= 20
-                AND !(bookings.date = "2016-11-16" AND bookings.time = "10:00:00")
-             */
-            rs = stmt.executeQuery(SQL);
+            connection.searchBookings();
+            rs = connection.getRS();
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
