@@ -26,8 +26,11 @@ public class databaseConnect {
     public databaseConnect() throws SQLException {
 
         host = "jdbc:mysql://localhost/bookingsystem";
+        //213.104.129.95/
         uName = "root";
+        //guest
         uPass = "";
+        //password
         con = DriverManager.getConnection(host, uName, uPass);
 
     }
