@@ -106,6 +106,29 @@ public class databaseConnect {
         
     }
 
+    public boolean validateUser(String ID) throws SQLException{
+        
+        ID = "\"" + ID + "\"";
+        
+        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        String SQL = "SELECT * FROM user where id = " + ID;
+        rs = stmt.executeQuery(SQL);
+        
+        int count = 0;
+        
+        while (rs.next()){
+            
+            count +=1;
+            
+        }
+        
+        if (count == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
    
     /**
      *  Gets the current result set from the SQL query

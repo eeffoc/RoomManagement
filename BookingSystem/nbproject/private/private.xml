@@ -5,11 +5,13 @@
         <group>
             <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/newUser.java</file>
             <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/mainMenu.java</file>
+            <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/databaseConnect.java</file>
             <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/adminScreen.java</file>
             <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/myBookings.java</file>
             <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/mainMenuAdmin.java</file>
             <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/roomsScreen.java</file>
             <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/userScreen.java</file>
+            <file>file:/C:/Users/Christopher/Documents/GitHub/RoomManagement/BookingSystem/src/loginScreen.java</file>
         </group>
     </open-files>
 </project-private>

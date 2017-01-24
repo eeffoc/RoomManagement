@@ -564,7 +564,7 @@ public final class roomsScreen extends javax.swing.JFrame {
             rs.moveToInsertRow();   //Move to the end of record set
 
             //Update recordset with the new record
-            rs.updateInt("ID", newID);
+            //rs.updateInt("ID", newID);
             rs.updateString("type", type);
             rs.updateInt("capacity", capacity);
             rs.updateBoolean("projector", projector);
