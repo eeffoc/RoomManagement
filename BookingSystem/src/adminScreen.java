@@ -64,7 +64,7 @@ public final class adminScreen extends javax.swing.JFrame {
                 //Get the users details from the database
                 String id = rs.getString("ID");
                 String first_name = rs.getString("first_name");
-                String last_name = rs.getString("last_name");
+                String last_name = rs.getString("second_name");
                 String setAuthorisation = rs.getString("edit_authorisation");
 
                 textID.setText(id);

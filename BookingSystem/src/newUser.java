@@ -196,9 +196,9 @@ public class newUser extends javax.swing.JFrame {
                     rs.moveToInsertRow();
 
                     rs.updateString("ID", ID);
-                    rs.updateString("First_Name", first);
-                    rs.updateString("Last_Name", last);
-                    rs.updateString("Password", password);
+                    rs.updateString("first_name", first);
+                    rs.updateString("second_name", last);
+                    rs.updateString("password", password);
                     rs.updateString("edit_authorisation", "u");
                     rs.insertRow();
 

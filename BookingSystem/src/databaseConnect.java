@@ -24,14 +24,16 @@ public class databaseConnect {
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public databaseConnect() throws SQLException {
-
-        host = "jdbc:mysql://localhost/bookingsystem";
+            
+        
+        host = "jdbc:mysql://213.104.129.95:3306/roomBooking";
         //213.104.129.95/
         uName = "root";
         //guest
-        uPass = "";
+        uPass = "root";
         //password
         con = DriverManager.getConnection(host, uName, uPass);
+        System.out.println("Connected database successfully...");
 
     }
 
