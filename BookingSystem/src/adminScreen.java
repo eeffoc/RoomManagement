@@ -87,7 +87,7 @@ public final class adminScreen extends javax.swing.JFrame {
         //Get the  recordsets details
         String id = rs.getString("ID");
         String first_name = rs.getString("First_Name");
-        String last_name = rs.getString("Last_Name");
+        String last_name = rs.getString("Second_Name");
         String setAuthorisation = rs.getString("edit_authorisation");
 
         //Put the first recordsets details on the screens

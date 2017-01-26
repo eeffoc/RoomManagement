@@ -135,7 +135,9 @@ public class mainMenuAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUserScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserScreenActionPerformed
-         
+
+        this.dispose();
+        
         try {
             new adminScreen(userID).setVisible(true);
         } catch (SQLException ex) {
