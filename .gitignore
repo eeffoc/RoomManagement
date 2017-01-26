@@ -1,2 +1,7 @@
 /BookingSystem/build/
 /BookingSystem/dist/
+/BookingSystem/nbproject/private/
+/BookingSystem/nbbuild/
+/BookingSystem/nbdist/
+nbactions.xml
+nb-configuration.xml
