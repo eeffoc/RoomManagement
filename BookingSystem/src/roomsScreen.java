@@ -646,6 +646,12 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSaveRecordActionPerformed
 
+    
+    /**
+     * will create a erase any entered data from the form
+     * 
+     * @param evt waits for the "cancel" button click
+     */
     private void btnCancelRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelRecordActionPerformed
 
         //Set relevant buttons to clickable
@@ -675,6 +681,12 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCancelRecordActionPerformed
 
+    
+    /**
+     * will go back to the main menu
+     * 
+     * @param evt waits for the "back" button click
+     */
     private void btnLoginScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginScreenActionPerformed
 
         try {
