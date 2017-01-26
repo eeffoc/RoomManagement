@@ -22,6 +22,7 @@ public class newUser extends javax.swing.JFrame {
     databaseConnect connection;
 
     /**
+     * creates a new database connection and loads the form
      *
      * @throws SQLException will identify an SQL error if/when one occurs
      */
@@ -35,7 +36,8 @@ public class newUser extends javax.swing.JFrame {
     }
 
     /**
-     *
+     * Makes all data in the text box empty
+     * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public void DoConnect() throws SQLException {
@@ -172,6 +174,11 @@ public class newUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textIDActionPerformed
 
+    /**
+     * Will take the deta from the form and save it to the database as a new user 
+     * 
+     * @param evt waits  for button click
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
 
@@ -228,6 +235,12 @@ public class newUser extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    
+    /**
+     * Will close the form and go back to the login screen
+     * 
+     * @param evt waits for button click
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
 

@@ -5,9 +5,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * The class will create an interface for the user. In this interface, the admin
- * can view all users on the system and edit their details if it is required.
- * The admin can also add new users on the system.
+ * The class will create an interface for the user to see rooms on the system
  *
  * @author Christopher
  */
@@ -19,6 +17,7 @@ public final class roomsScreen extends javax.swing.JFrame {
     String userID;     //An interger to store the users ID         
 
     /**
+     * creates a new database connection and shows form components
      *
      * @param tempID temporarily stores the variable until moved to a global variable
      * @throws SQLException will identify an SQL error if/when one occurs
@@ -38,11 +37,10 @@ public final class roomsScreen extends javax.swing.JFrame {
         DoConnect();
 
     }
-
-    //Runs the sql statemtn to collect user details, and then gets each ready to view.
-
+    
     /**
-     *
+     * access the rooms table in the database to display the query results    
+     * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     @SuppressWarnings("empty-statement")
@@ -77,7 +75,11 @@ public final class roomsScreen extends javax.swing.JFrame {
 
         }
     }
-
+    /**
+     * gets the record details for all rooms on the system
+     * 
+     * @throws SQLException  will identify an SQL error if/when one occurs
+     */
     private void getRecordDetails() throws SQLException {
 
         int typeIndex = 0;
@@ -327,7 +329,11 @@ public final class roomsScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textIDActionPerformed
 
-    //When the "first" button is pressed
+    /**
+     * will go to the first record in the query results
+     * 
+     * @param evt waits for "first" button click
+     */
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
 
         try {
@@ -344,7 +350,11 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnFirstActionPerformed
 
-    //When the "next" button is pressed
+    /**
+     * will go to the next record in the query results
+     * 
+     * @param evt waits for "back" button
+     */
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
 
         try {
@@ -367,7 +377,11 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNextActionPerformed
 
-    //When the "previous" button is pressed
+    /**
+     * will go to the previous result in the query
+     * 
+     * @param evt waits for the "previous" button click
+     */
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
 
         try {
@@ -389,7 +403,11 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPreviousActionPerformed
 
-    //When the "last" button is pressed
+    /**
+     * will go to the last result of the query
+     * 
+     * @param evt waits for the "last" button click
+     */
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
 
         try {
@@ -406,7 +424,11 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLastActionPerformed
 
-    //When the "update" button is pressed
+    /**
+     * will go to the update given record to the database
+     * 
+     * @param evt waits for the "update" button click
+     */
     private void btnUpdateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRecordActionPerformed
 
         //Get the  recordsets details
@@ -442,7 +464,11 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnUpdateRecordActionPerformed
 
-    //When the "delete" button is pressed
+/**
+     * will delete the current record from the database
+     * 
+     * @param evt waits for the "delete" button click
+     */
     private void btnDeleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRecordActionPerformed
 
         try {
@@ -496,7 +522,11 @@ public final class roomsScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteRecordActionPerformed
 
-    //When the "new record" button is pressed
+    /**
+     * will create a new space for a new record on the database
+     * 
+     * @param evt waits for the "new record" button click
+     */
     private void btnNewRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewRecordActionPerformed
 
         // Make relevant buttons clickable
