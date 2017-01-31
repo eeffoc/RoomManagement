@@ -13,9 +13,7 @@ import javax.swing.JOptionPane;
  */
 public final class adminScreen extends javax.swing.JFrame {
 
-        
-
-     databaseConnect connection;
+    databaseConnect connection;
         
         
     ResultSet rs;       
@@ -24,13 +22,13 @@ public final class adminScreen extends javax.swing.JFrame {
     
     /**
      *
-     * @param tempID stores the ID temporarily, until passed to the global
-     * variable
+     * @param tempID stores the current user ID, to be saved to the class
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public adminScreen(String tempID) throws SQLException {
 
-       connection = new databaseConnect();
+        connection = new databaseConnect();
+        
         ResultSet rs;
         
         userID = tempID;
@@ -41,7 +39,6 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }
 
-    //Runs the sql statemtn to collect user details, and then gets each ready to view.
     /**
      * Runs the selected SQL statement on the database, which in this case, the
      * table will get all users from the user table, and stop when it has found
@@ -78,7 +75,7 @@ public final class adminScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Will get the requested data of the from the record set of the database.
+     * Will get the user details, and add them to the on screen boxes
      *
      * @throws SQLException
      */
@@ -325,8 +322,8 @@ public final class adminScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_textFirstNameActionPerformed
 
     /**
-     * When this method is triggered, the system will move to the first on the
-     * record set
+     * When btnFirst is clicked, the system will move to the first record on the
+     * record set of all users on the system
      *
      * @param evt - when the "first" button is pressed do this.
      */
@@ -347,8 +344,8 @@ public final class adminScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFirstActionPerformed
 
     /**
-     * When this method is triggered, the system will move to the next data on
-     * the record set
+     * When btnNext is clicked, the system will move to the next data on
+     * the record set of all users
      *
      * @param evt - when the "next" button is pressed do this.
      */
@@ -374,6 +371,13 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNextActionPerformed
 
+    /**
+     * When btnPrevious is clicked, the system will move to the previous data
+     * on the record set of all users
+     * 
+     * @param evt - when the "previous" button is pressed do this.
+     */
+    
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
 
         try {
@@ -395,6 +399,13 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPreviousActionPerformed
 
+    /**
+     * When btnLast is clicked, the system will move to the last data
+     * on the record set of all users
+     * 
+     * @param evt - when the "last" button is pressed, do this
+     */
+    
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
 
         try {
@@ -411,6 +422,13 @@ public final class adminScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLastActionPerformed
 
+    /**
+     * When btnUpdate is clicked, the system will update the user being viewed,
+     * with the new data from this form.
+     * 
+     * @param evt 
+     */
+    
     private void btnUpdateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRecordActionPerformed
 
         //Temporary Strings to hold the updated user details
