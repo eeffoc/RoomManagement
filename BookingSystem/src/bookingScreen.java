@@ -23,7 +23,8 @@ public class bookingScreen extends javax.swing.JFrame {
     String authorisation;
 
     /**
-     * Creates new form bookingScreen
+     * Creates new form bookingScreen, which will create a new database connection
+     * and will load the components of the form
      *
      * @param ID Will hold the user ID temporarily until stored on the global
      * variable

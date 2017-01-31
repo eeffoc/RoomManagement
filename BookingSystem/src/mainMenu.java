@@ -128,6 +128,7 @@ public class mainMenu extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();
          
     }//GEN-LAST:event_btnUserScreenActionPerformed
 
@@ -138,7 +139,7 @@ public class mainMenu extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-         this.dispose();
+        this.dispose();
 
     }//GEN-LAST:event_btnLogOutActionPerformed
 
@@ -157,11 +158,10 @@ public class mainMenu extends javax.swing.JFrame {
        
         try {
             new bookingScreen(userID, authorisation).setVisible(true);
-            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        this.dispose();
     }//GEN-LAST:event_btnUserScreen2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
