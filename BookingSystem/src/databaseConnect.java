@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * 
  * @author Christopher
  */
 public class databaseConnect {
@@ -19,7 +19,8 @@ public class databaseConnect {
     ResultSet rs;
 
     /**
-     * This class will handle all the database SQL queries and connections
+     * This class will handle all the database SQL queries between the database and the system,
+     * holding how to connect onto the database
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
@@ -33,12 +34,10 @@ public class databaseConnect {
         uPass = "root";
         //password
         con = DriverManager.getConnection(host, uName, uPass);
-        System.out.println("Connected database successfully...");
-
     }
 
     /**
-     * Gets all rooms on the database
+     * Gets all rooms on the database from table room, and stores them as a resultset
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
@@ -52,6 +51,12 @@ public class databaseConnect {
         
     }
     
+    
+    /**
+     * gets all bookings which match the entered fields into the bookings form
+     * 
+     * @throws SQLException will identify an SQL error if/when one occurs
+     */
     public void searchBookings() throws SQLException{
     
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -70,7 +75,11 @@ public class databaseConnect {
             rs = stmt.executeQuery(SQL);
     }
     
-   
+   /**
+    * Will select all bookings from table booking, and store this as a resultset
+    * 
+    * @throws SQLException will identify an SQL error if/when one occurs
+    */
     public void getAllBookings() throws SQLException{
         
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -79,7 +88,8 @@ public class databaseConnect {
     }
     
     /**
-     * Gets all the bookings past todays date, where user ID = current user
+     * Gets all the bookings past todays date, where user ID = current user, and 
+     * stores this as a result set
      * 
      * @param ID takes ID for the SQL statement
      * @throws SQLException will identify an SQL error if/when one occurs 
@@ -97,7 +107,7 @@ public class databaseConnect {
     }
     
     /**
-     * Gets all users from the user table
+     * Gets all users from the user table and stores this as a result set
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
@@ -111,6 +121,14 @@ public class databaseConnect {
         
     }
 
+    /**
+     * takes a user ID, converting it to a SQL string format, which is then used
+     * in a query to ensure that it is unique
+     * 
+     * @param ID holds the unique ID of the user
+     * @return returns if the ID is unique
+     * @throws SQLException will identify an SQL error if/when one occurs
+     */
     public boolean validateUser(String ID) throws SQLException{
         
         ID = "\"" + ID + "\"";
@@ -136,7 +154,7 @@ public class databaseConnect {
     }
    
     /**
-     *  Gets the current result set from the SQL query
+     *  Gets the current resultset stored on the class
      * 
      * @return returns the result set from a query
      */
@@ -147,7 +165,7 @@ public class databaseConnect {
     }
 
     /**
-     * Closes the current connection
+     * Closes the current connection to the database
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
