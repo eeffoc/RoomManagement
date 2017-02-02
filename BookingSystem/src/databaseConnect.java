@@ -101,7 +101,6 @@ public class databaseConnect {
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM booking WHERE date >= CURDATE() and userID = " + ID;
         
-        System.out.println(SQL);
         rs = stmt.executeQuery(SQL);
         
     }
