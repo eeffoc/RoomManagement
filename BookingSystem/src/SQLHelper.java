@@ -7,13 +7,13 @@ import java.sql.Statement;
 
 /**
  * 
- * @author Christopher
+ * @author Christopher, Markus
  */
 public class SQLHelper {
 
-    String host;
-    String uName;
-    String uPass;
+    private final static String DB_URL = "jdbc:mysql://213.104.129.95:3306/roomBooking";
+    private final static String DB_USERNAME = "root";
+    private final static String DB_PASSWORD = "root";
     Connection con;
     Statement stmt;
     ResultSet rs;
@@ -24,16 +24,13 @@ public class SQLHelper {
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public SQLHelper() throws SQLException {
-            
+    public SQLHelper(){
         
-        host = "jdbc:mysql://213.104.129.95:3306/roomBooking";
-        //213.104.129.95/
-        uName = "root";
-        //guest
-        uPass = "root";
-        //password
-        con = DriverManager.getConnection(host, uName, uPass);
+        try {
+            con = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        } catch (SQLException e) {
+            System.out.println("Could not connect to database! - Error: " + e);
+	} 
     }
 
     /**
