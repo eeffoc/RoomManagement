@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class bookingScreen extends javax.swing.JFrame {
 
-    databaseConnect connection;
+    SQLHelper connection;
     ResultSet rs;
     String userID;
     String authorisation;
@@ -35,7 +35,7 @@ public class bookingScreen extends javax.swing.JFrame {
      */
     public bookingScreen(String ID, String author) throws SQLException {
 
-        connection = new databaseConnect();  
+        connection = new SQLHelper();  
         // access the database
         
         userID = ID;

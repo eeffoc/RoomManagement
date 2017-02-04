@@ -9,7 +9,7 @@ import java.sql.Statement;
  * 
  * @author Christopher
  */
-public class databaseConnect {
+public class SQLHelper {
 
     String host;
     String uName;
@@ -24,7 +24,7 @@ public class databaseConnect {
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public databaseConnect() throws SQLException {
+    public SQLHelper() throws SQLException {
             
         
         host = "jdbc:mysql://213.104.129.95:3306/roomBooking";

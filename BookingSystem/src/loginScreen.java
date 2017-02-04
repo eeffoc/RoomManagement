@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class loginScreen extends javax.swing.JFrame {
 
-    databaseConnect connection;
+    SQLHelper connection;
             
     /**
      * Creates new form admin 
@@ -23,7 +23,7 @@ public class loginScreen extends javax.swing.JFrame {
      */
     public loginScreen() throws SQLException {
 
-        connection = new databaseConnect();     
+        connection = new SQLHelper();     
         
         initComponents();
         

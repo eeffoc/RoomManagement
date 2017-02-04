@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class userScreen extends javax.swing.JFrame {
     
-    databaseConnect connection;
+    SQLHelper connection;
     ResultSet rs;
     String userID;
     String authorisation = "";
@@ -24,7 +24,7 @@ public class userScreen extends javax.swing.JFrame {
      */
     public userScreen(String tempID) throws SQLException {
 
-        connection = new databaseConnect();
+        connection = new SQLHelper();
         userID = tempID;
 
         initComponents();

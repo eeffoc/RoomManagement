@@ -24,7 +24,7 @@ public class myBookings extends javax.swing.JFrame {
      * Creates new form myBookings
      */
     
-    databaseConnect connection;
+    SQLHelper connection;
     ResultSet rs;
     int curRow = 0;
     String ID;
@@ -38,7 +38,7 @@ public class myBookings extends javax.swing.JFrame {
      */
     public myBookings(String userID, String authorisation) throws SQLException {
 
-        connection = new databaseConnect();
+        connection = new SQLHelper();
 
         ID = userID;
         author = authorisation;

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public final class adminScreen extends javax.swing.JFrame {
 
-    databaseConnect connection;
+    SQLHelper connection;
         
         
     ResultSet rs;       
@@ -29,7 +29,7 @@ public final class adminScreen extends javax.swing.JFrame {
      */
     public adminScreen(String tempID) throws SQLException {
 
-        connection = new databaseConnect();
+        connection = new SQLHelper();
         
         ResultSet rs;
         

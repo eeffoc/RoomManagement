@@ -19,7 +19,7 @@ public class newUser extends javax.swing.JFrame {
     /**
      * Creates new form newUser
      */
-    databaseConnect connection;
+    SQLHelper connection;
 
     /**
      * creates a new database connection and loads the form
@@ -28,7 +28,7 @@ public class newUser extends javax.swing.JFrame {
      */
     public newUser() throws SQLException {
 
-        connection = new databaseConnect();
+        connection = new SQLHelper();
 
         initComponents();
 
