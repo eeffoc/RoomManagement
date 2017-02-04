@@ -127,7 +127,7 @@ public class loginScreen extends javax.swing.JFrame {
         ResultSet rs = connection.getRS();
         
         String adminID = userName.getText();
-        String password = (String) textPassword.getText();
+        String password = String.valueOf(textPassword.getPassword());
         String authorisation = "u";
 
         try {
