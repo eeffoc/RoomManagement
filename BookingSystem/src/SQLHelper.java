@@ -1,9 +1,11 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import static org.apache.commons.dbutils.DbUtils.*;
 
 /**
  * 
@@ -14,7 +16,7 @@ public class SQLHelper {
     private final static String DB_URL = "jdbc:mysql://213.104.129.95:3306/roomBooking";
     private final static String DB_USERNAME = "root";
     private final static String DB_PASSWORD = "root";
-    Connection con;
+    Connection conn;
     Statement stmt;
     ResultSet rs;
 
@@ -25,38 +27,81 @@ public class SQLHelper {
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public SQLHelper(){
-        
-        try {
-            con = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-        } catch (SQLException e) {
-            System.out.println("Could not connect to database! - Error: " + e);
-	} 
+
     }
 
+    public int authoriseLoginCredentials(String enteredUsername, String enteredPassword){
+        //Please God forgive me for handling password as plain text
+        //This isn't my choice but how the db is currently set up
+        //TODO: Fix me ASAP
+        
+        final int INCORRECT_CREDENTIALS = 99;
+        final int LOGIN_AUTHORISED_USER = 100;
+        final int LOGIN_AUTHORISED_ADMIN = 101;
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            
+            if(!enteredUsername.equals("") || !enteredPassword.equals("")) { 
+                String sql="SELECT ID,password,edit_authorisation FROM user where ID=? and password=?";
+                PreparedStatement ps=conn.prepareStatement(sql);
+                
+                ps.setString(1,enteredUsername);
+                ps.setString(2,enteredPassword);
+                
+                rs = ps.executeQuery();
+                if(rs.next()){
+                    String authorisationLevel = rs.getString("edit_authorisation");
+                    if(authorisationLevel.equals("u")){
+                        return LOGIN_AUTHORISED_USER;
+                    } else { 
+                        return LOGIN_AUTHORISED_ADMIN;
+                    }
+                } else {
+                    return INCORRECT_CREDENTIALS;
+                }
+            }
+        } catch (SQLException e){
+
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        }
+        return INCORRECT_CREDENTIALS;
+    }
+    
     /**
      * Gets all rooms on the database from table room, and stores them as a resultset
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public void getRooms() throws SQLException{
+    public void getRooms(){
         
-        //Runs SQL statement on the database
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM room";
-        rs = stmt.executeQuery(SQL);
-        //This will access the table
-        
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            
+            //Runs SQL statement on the database
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM room";
+            rs = stmt.executeQuery(SQL);
+            //This will access the table
+        } catch (SQLException e){
+
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        }
     }
-    
     
     /**
      * gets all bookings which match the entered fields into the bookings form
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public void searchBookings() throws SQLException{
+    public void searchBookings(){
     
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL;
             SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = 0 AND room.capacity <= 21 AND (booking.date <> \"2016-11-16\" AND booking.time <> \"9:00:00\"))");
             //Need way to check if room us taken at time
@@ -70,6 +115,12 @@ public class SQLHelper {
                 AND !(bookings.date = "2016-11-16" AND bookings.time = "10:00:00")
              */
             rs = stmt.executeQuery(SQL);
+        } catch (SQLException e){
+
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        }
+            
     }
     
    /**
@@ -77,11 +128,19 @@ public class SQLHelper {
     * 
     * @throws SQLException will identify an SQL error if/when one occurs
     */
-    public void getAllBookings() throws SQLException{
+    public void getAllBookings(){
         
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM booking";
-        rs = stmt.executeQuery(SQL);
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM booking";
+            rs = stmt.executeQuery(SQL);
+        } catch (SQLException e){
+
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        }
     }
     
     /**
@@ -93,13 +152,20 @@ public class SQLHelper {
      */
     public void getMyBookings(String ID) throws SQLException{
         
-        ID = "\"" + ID + "\"";
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            
+            ID = "\"" + ID + "\"";
         
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM booking WHERE date >= CURDATE() and userID = " + ID;
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM booking WHERE date >= CURDATE() and userID = " + ID;
         
-        rs = stmt.executeQuery(SQL);
-        
+            rs = stmt.executeQuery(SQL);
+        } catch (SQLException e){
+
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        } 
     }
     
     /**
@@ -109,14 +175,20 @@ public class SQLHelper {
      */
     public void getUsers() throws SQLException {
 
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         String SQL = "SELECT * FROM user";
         rs = stmt.executeQuery(SQL);
         //This will access the table
+        } catch (SQLException e){
 
-        
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        }
     }
-
+    
     /**
      * takes a user ID, converting it to a SQL string format, which is then used
      * in a query to ensure that it is unique
@@ -125,13 +197,16 @@ public class SQLHelper {
      * @return returns if the ID is unique
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public boolean validateUser(String ID) throws SQLException{
+    public boolean validateUser(String ID){
         
-        ID = "\"" + ID + "\"";
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            
+            ID = "\"" + ID + "\"";
         
-        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM user where id = " + ID;
-        rs = stmt.executeQuery(SQL);
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM user where id = " + ID;
+            rs = stmt.executeQuery(SQL);
         
         int count = 0;
         
@@ -147,6 +222,13 @@ public class SQLHelper {
         else{
             return false;
         }
+        } catch (SQLException e){
+
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        }
+        //TODO: Fix me
+        return false;
     }
    
     /**

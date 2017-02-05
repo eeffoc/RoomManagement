@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class loginScreen extends javax.swing.JFrame {
 
-    SQLHelper connection;
+    SQLHelper db;
             
     /**
      * Creates new form admin 
@@ -23,12 +23,10 @@ public class loginScreen extends javax.swing.JFrame {
      */
     public loginScreen() throws SQLException {
 
-        connection = new SQLHelper();     
-        
         initComponents();
+        db = new SQLHelper(); 
         
-        connection.getUsers();
-        
+        //db.getUsers(); 
     }
 
     /**
@@ -121,72 +119,73 @@ public class loginScreen extends javax.swing.JFrame {
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
 
-        boolean boolID = false;
-
-               
-        ResultSet rs = connection.getRS();
-        
-        String adminID = userName.getText();
-        String password = String.valueOf(textPassword.getPassword());
-        String authorisation = "u";
-
-        try {
-            while (rs.next()) {
-                try {
-                    if (rs.getString("ID").equals(adminID) && !boolID) {
-
-                        if (password.equals(rs.getString("Password"))) {
-                            boolID = true;
-                            authorisation = rs.getString("edit_authorisation");
-                        }
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (!boolID) {
-            try {
-                rs.next();
-            } catch (SQLException ex) {
-                Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        try {
-
-            if (boolID) {
-                
-                if (authorisation.equals("u")){
-                    
-                    new mainMenu(adminID).setVisible(true);
-                    this.dispose();
-                    
-                }
-                
-                else if(authorisation.equals("a")){
-                    
-                    new mainMenuAdmin(adminID).setVisible(true);
-                    this.dispose();
-                    
-                }                
-
-            } else {
-                
-                JOptionPane.showMessageDialog(loginScreen.this, "Password incorrect");
-
-                connection.closeConnection();
-
-                new loginScreen().setVisible(true);
-                this.dispose();
-                
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        db.authoriseLoginCredentials(userName.getText(), String.valueOf(textPassword.getPassword()));
+//        boolean boolID = false;
+//
+//               
+//        ResultSet rs = db.getRS();
+//        
+//        String adminID = userName.getText();
+//        String password = String.valueOf(textPassword.getPassword());
+//        String authorisation = "u";
+//
+//        try {
+//            while (rs.next()) {
+//                try {
+//                    if (rs.getString("ID").equals(adminID) && !boolID) {
+//
+//                        if (password.equals(rs.getString("Password"))) {
+//                            boolID = true;
+//                            authorisation = rs.getString("edit_authorisation");
+//                        }
+//                    }
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        if (!boolID) {
+//            try {
+//                rs.next();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//
+//        try {
+//
+//            if (boolID) {
+//                
+//                if (authorisation.equals("u")){
+//                    
+//                    new mainMenu(adminID).setVisible(true);
+//                    this.dispose();
+//                    
+//                }
+//                
+//                else if(authorisation.equals("a")){
+//                    
+//                    new mainMenuAdmin(adminID).setVisible(true);
+//                    this.dispose();
+//                    
+//                }                
+//
+//            } else {
+//                
+//                JOptionPane.showMessageDialog(loginScreen.this, "Password incorrect");
+//
+//                db.closeConnection();
+//
+//                new loginScreen().setVisible(true);
+//                this.dispose();
+//                
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
 
     }//GEN-LAST:event_btnLogInActionPerformed

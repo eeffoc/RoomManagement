@@ -195,7 +195,6 @@ public class newUser extends javax.swing.JFrame {
         
         ResultSet rs = connection.getRS();
 
-        try {
             if (connection.validateUser(ID)) {
 
                 try {
@@ -229,10 +228,6 @@ public class newUser extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ("Username invalid \n\n  ID: " + ID + " is already an ID"));
 
            }
-        } catch (SQLException ex) {
-            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
     

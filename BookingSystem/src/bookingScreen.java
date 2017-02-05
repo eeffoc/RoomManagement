@@ -229,13 +229,9 @@ public class bookingScreen extends javax.swing.JFrame {
 
         JComboBox<String> bookingTime = cmbTime;
 
-        try {
-            connection.searchBookings();
-            rs = connection.getRS();
-        } catch (SQLException ex) {
-            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        connection.searchBookings();
+        rs = connection.getRS();
+      
         try {
             while (rs.next()) {
 
