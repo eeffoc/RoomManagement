@@ -28,7 +28,9 @@ public class newUser extends javax.swing.JFrame {
      */
     public newUser() throws SQLException {
 
-        connection = new databaseConnect();
+        if (connection == null){
+             connection = new databaseConnect(); 
+         }
 
         initComponents();
 

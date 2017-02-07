@@ -38,8 +38,10 @@ public class myBookings extends javax.swing.JFrame {
      */
     public myBookings(String userID, String authorisation) throws SQLException {
 
-        connection = new databaseConnect();
-
+        if (connection == null){
+            connection = new databaseConnect(); 
+        }
+        
         ID = userID;
         author = authorisation;
 

@@ -1,4 +1,4 @@
-CREATE TABLE `user` (
+``CREATE TABLE `user` (
   `ID` varchar(11),
   `first_name` varchar(20),
   `second_name` varchar(20),

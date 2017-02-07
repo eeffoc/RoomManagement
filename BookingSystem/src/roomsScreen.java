@@ -25,7 +25,9 @@ public final class roomsScreen extends javax.swing.JFrame {
     public roomsScreen(String tempID) throws SQLException {
 
         // Connecting to a set database and storing that connection in connection con for reference.
-        connection = new databaseConnect();
+        if (connection == null){
+            connection = new databaseConnect(); 
+        }
 
         // Storing userID for reference
         userID = tempID;

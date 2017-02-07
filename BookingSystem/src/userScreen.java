@@ -24,7 +24,10 @@ public class userScreen extends javax.swing.JFrame {
      */
     public userScreen(String tempID) throws SQLException {
 
-        connection = new databaseConnect();
+        if (connection == null){
+            connection = new databaseConnect(); 
+        }
+        
         userID = tempID;
 
         initComponents();

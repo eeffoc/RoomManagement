@@ -1,9 +1,6 @@
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -34,8 +31,11 @@ public class bookingScreen extends javax.swing.JFrame {
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public bookingScreen(String ID, String author) throws SQLException {
-
-        connection = new databaseConnect();  
+        
+        if (connection == null){
+            connection = new databaseConnect(); 
+        }
+         
         // access the database
         
         userID = ID;

@@ -23,7 +23,9 @@ public class loginScreen extends javax.swing.JFrame {
      */
     public loginScreen() throws SQLException {
 
-        connection = new databaseConnect();     
+        if (connection == null){
+            connection = new databaseConnect(); 
+        }     
         
         initComponents();
         
