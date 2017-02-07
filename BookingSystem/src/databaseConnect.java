@@ -32,7 +32,7 @@ public class databaseConnect {
         uName = "root";
         //guest
         uPass = "root";
-        //password
+        //NurfThis
         con = DriverManager.getConnection(host, uName, uPass);
     }
 
