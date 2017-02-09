@@ -1,6 +1,8 @@
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -227,10 +229,17 @@ public class bookingScreen extends javax.swing.JFrame {
         int capacity = (int) spnCapacity.getValue();
         boolean projector = checkProjector.isSelected();
 
-        JComboBox<String> bookingTime = cmbTime;
+        String bookingTime = cmbTime.getSelectedItem().toString();
 
+        System.out.println("hf");
+        
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
+        String date = formater.format(datePicker.getDate());
+        System.out.println(date);
+        
+        
         try {
-            connection.searchBookings();
+            connection.searchBookings(capacity, projector, bookingTime);
             rs = connection.getRS();
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -285,14 +294,8 @@ public class bookingScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_datePickerActionPerformed
 
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
-
-        if (datePicker.getDate() != null) {
-            SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-            formater.format(datePicker.getDate());
-            System.out.println(formater.format(datePicker.getDate()));
-        } else {
-            JOptionPane.showMessageDialog(bookingScreen.this, "Enter a date");
-        }
+        
+        
 
     }//GEN-LAST:event_btnBookActionPerformed
 

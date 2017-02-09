@@ -386,7 +386,7 @@ public class myBookings extends javax.swing.JFrame {
 
             //Close the database
             connection.closeConnection();
-            connection.searchBookings();
+            //connection.searchBookings();
 
             JOptionPane.showMessageDialog(this, "Record Deleted");
 
