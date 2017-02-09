@@ -32,19 +32,21 @@ public class SQLHelper {
 
     }
 
-    public int authoriseLoginCredentials(String enteredUsername, String enteredPassword){
+    public String[] authoriseLoginCredentials(String enteredUsername, String enteredPassword){
         //Please God forgive me for handling password as plain text
         //This isn't my choice but how the db is currently set up
         //TODO: Fix me ASAP
         
-        final int INCORRECT_CREDENTIALS = 99;
-        final int LOGIN_AUTHORISED_USER = 100;
-        final int LOGIN_AUTHORISED_ADMIN = 101;
+        String[] usernameAccess = new String[2];
+        //pos 0 = access level ("edit_authorisation")
+        //pos 1 = username ("ID")
         
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             
-            if(!enteredUsername.equals("") && !enteredPassword.equals("")) { 
+            if(enteredUsername.equals("") || enteredPassword.equals("")) { 
+                usernameAccess[0] = "error";
+            } else {
                 String sql="SELECT ID,password,edit_authorisation FROM user where ID=? and password=?";
                 PreparedStatement ps=conn.prepareStatement(sql);
                 
@@ -53,14 +55,10 @@ public class SQLHelper {
                 
                 rs = ps.executeQuery();
                 if(rs.next()){
-                    String authorisationLevel = rs.getString("edit_authorisation");
-                    if(authorisationLevel.equals("u")){
-                        return LOGIN_AUTHORISED_USER;
-                    } else { 
-                        return LOGIN_AUTHORISED_ADMIN;
-                    }
+                    usernameAccess[0] = rs.getString("edit_authorisation");
+                    usernameAccess[1] = rs.getString("ID");
                 } else {
-                    return INCORRECT_CREDENTIALS;
+                    usernameAccess[0] = "error";
                 }
             }
         } catch (SQLException e){
@@ -68,7 +66,7 @@ public class SQLHelper {
         } finally {
             closeQuietly(conn, stmt, rs);
         }
-        return INCORRECT_CREDENTIALS;
+        return usernameAccess;
     }
     
     /**

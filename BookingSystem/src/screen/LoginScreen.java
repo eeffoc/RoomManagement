@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import screen.admin.AdminMenu;
+import screen.user.UserMenu;
 
 /**
  *
@@ -122,75 +124,24 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
 
-        db.authoriseLoginCredentials(userName.getText(), String.valueOf(textPassword.getPassword()));
-//        boolean boolID = false;
-//
-//               
-//        ResultSet rs = db.getRS();
-//        
-//        String adminID = userName.getText();
-//        String password = String.valueOf(textPassword.getPassword());
-//        String authorisation = "u";
-//
-//        try {
-//            while (rs.next()) {
-//                try {
-//                    if (rs.getString("ID").equals(adminID) && !boolID) {
-//
-//                        if (password.equals(rs.getString("Password"))) {
-//                            boolID = true;
-//                            authorisation = rs.getString("edit_authorisation");
-//                        }
-//                    }
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        if (!boolID) {
-//            try {
-//                rs.next();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//
-//        try {
-//
-//            if (boolID) {
-//                
-//                if (authorisation.equals("u")){
-//                    
-//                    new mainMenu(adminID).setVisible(true);
-//                    this.dispose();
-//                    
-//                }
-//                
-//                else if(authorisation.equals("a")){
-//                    
-//                    new mainMenuAdmin(adminID).setVisible(true);
-//                    this.dispose();
-//                    
-//                }                
-//
-//            } else {
-//                
-//                JOptionPane.showMessageDialog(LoginScreen.this, "Password incorrect");
-//
-//                db.closeConnection();
-//
-//                new LoginScreen().setVisible(true);
-//                this.dispose();
-//                
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
-
+        String[] usernameAccess = db.authoriseLoginCredentials(userName.getText(), 
+                String.valueOf(textPassword.getPassword()));
+        
+        if(usernameAccess[0].equals("error")){
+            JOptionPane.showMessageDialog(LoginScreen.this, "Username or Password is Incorrect!");
+        } else {
+            try {
+                if(usernameAccess[0].equals("u")){
+                    new UserMenu(usernameAccess[1]).setVisible(true);
+                    this.dispose();
+                } else if (usernameAccess[0].equals("a")){
+                    new AdminMenu(usernameAccess[1]).setVisible(true);
+                    this.dispose();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUserActionPerformed
