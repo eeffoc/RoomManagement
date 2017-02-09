@@ -1,3 +1,9 @@
+package screen;
+
+import screen.user.UserMenu;
+import screen.admin.AdminUpdateUserInfo;
+import screen.admin.AdminMenu;
+import db.SQLHelper;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.Format;
@@ -18,10 +24,10 @@ import javax.swing.JOptionPane;
  *
  * @author Christopher
  */
-public class myBookings extends javax.swing.JFrame {
+public class MyBookings extends javax.swing.JFrame {
 
     /**
-     * Creates new form myBookings
+     * Creates new form MyBookings
      */
     
     SQLHelper connection;
@@ -36,7 +42,7 @@ public class myBookings extends javax.swing.JFrame {
      * @param authorisation temporarily holds user authorization until moved to a global variable
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public myBookings(String userID, String authorisation) throws SQLException {
+    public MyBookings(String userID, String authorisation) throws SQLException {
 
         connection = new SQLHelper();
 
@@ -287,12 +293,12 @@ public class myBookings extends javax.swing.JFrame {
             } else {
                 //Go back to the current record and display message to the screen
                 rs.next();
-                JOptionPane.showMessageDialog(myBookings.this, "Start of database");
+                JOptionPane.showMessageDialog(MyBookings.this, "Start of database");
             }
 
         } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
 
-            JOptionPane.showMessageDialog(myBookings.this, "Start of database");
+            JOptionPane.showMessageDialog(MyBookings.this, "Start of database");
 
         }
 
@@ -308,7 +314,7 @@ public class myBookings extends javax.swing.JFrame {
 
         } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
 
-            JOptionPane.showMessageDialog(myBookings.this, err.getMessage());
+            JOptionPane.showMessageDialog(MyBookings.this, err.getMessage());
 
         }
 
@@ -325,12 +331,12 @@ public class myBookings extends javax.swing.JFrame {
             } else {
                 //Go back to the current record and display message to the screen
                 rs.previous();
-                JOptionPane.showMessageDialog(myBookings.this, "End of database");
+                JOptionPane.showMessageDialog(MyBookings.this, "End of database");
             }
 
         } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
 
-            JOptionPane.showMessageDialog(myBookings.this, "End of database");
+            JOptionPane.showMessageDialog(MyBookings.this, "End of database");
 
         }
 
@@ -346,7 +352,7 @@ public class myBookings extends javax.swing.JFrame {
 
         } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
 
-            JOptionPane.showMessageDialog(myBookings.this, err.getMessage());
+            JOptionPane.showMessageDialog(MyBookings.this, err.getMessage());
 
         }
 
@@ -358,15 +364,15 @@ public class myBookings extends javax.swing.JFrame {
 
         if (author.equals("a")) {
             try {
-                new mainMenuAdmin(ID).setVisible(true);
+                new AdminMenu(ID).setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(myBookings.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MyBookings.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {
-                new mainMenu(ID).setVisible(true);
+                new UserMenu(ID).setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NewBooking.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -392,20 +398,20 @@ public class myBookings extends javax.swing.JFrame {
 
             if (author.equals("a")) {
                 try {
-                    new mainMenuAdmin(ID).setVisible(true);
+                    new AdminMenu(ID).setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NewBooking.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 try {
-                    new mainMenu(ID).setVisible(true);
+                    new UserMenu(ID).setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NewBooking.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminUpdateUserInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed

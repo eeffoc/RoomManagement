@@ -1,4 +1,7 @@
+package screen;
 
+
+import db.SQLHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -14,10 +17,10 @@ import javax.swing.JOptionPane;
  *
  * @author Christopher
  */
-public class newUser extends javax.swing.JFrame {
+public class NewUser extends javax.swing.JFrame {
 
     /**
-     * Creates new form newUser
+     * Creates new form NewUser
      */
     SQLHelper connection;
 
@@ -26,7 +29,7 @@ public class newUser extends javax.swing.JFrame {
      *
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public newUser() throws SQLException {
+    public NewUser() throws SQLException {
 
         connection = new SQLHelper();
 
@@ -190,7 +193,7 @@ public class newUser extends javax.swing.JFrame {
         try {
             connection.getUsers();
         } catch (SQLException ex) {
-            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         ResultSet rs = connection.getRS();
@@ -213,15 +216,15 @@ public class newUser extends javax.swing.JFrame {
                     connection.closeConnection();
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 this.dispose();
 
                 try {
-                    new loginScreen().setVisible(true);
+                    new LoginScreen().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else{
@@ -242,9 +245,9 @@ public class newUser extends javax.swing.JFrame {
         this.dispose();
 
         try {
-            new loginScreen().setVisible(true);
+            new LoginScreen().setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(newUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnCancelActionPerformed

@@ -1,4 +1,9 @@
+package screen.user;
 
+
+import screen.user.UserMenu;
+import screen.admin.AdminUpdateUserInfo;
+import db.SQLHelper;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  *
  */
-public class userScreen extends javax.swing.JFrame {
+public class UserUpdateInfo extends javax.swing.JFrame {
     
     SQLHelper connection;
     ResultSet rs;
@@ -22,7 +27,7 @@ public class userScreen extends javax.swing.JFrame {
      * @param tempID - temporarily holds the user ID
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public userScreen(String tempID) throws SQLException {
+    public UserUpdateInfo(String tempID) throws SQLException {
 
         connection = new SQLHelper();
         userID = tempID;
@@ -188,7 +193,7 @@ public class userScreen extends javax.swing.JFrame {
             rs.updateString("First_Name", first);
             rs.updateString("last_Name", last);
             rs.updateRow();
-            JOptionPane.showMessageDialog(userScreen.this, "Updated");
+            JOptionPane.showMessageDialog(UserUpdateInfo.this, "Updated");
         } catch (SQLException err) {
             System.out.println(err.getMessage());
         }
@@ -199,9 +204,9 @@ public class userScreen extends javax.swing.JFrame {
 
         try {
             this.dispose();
-            new mainMenu(userID).setVisible(true);
+            new UserMenu(userID).setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminUpdateUserInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnLoginScreenActionPerformed

@@ -1,3 +1,5 @@
+package db;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,7 +44,7 @@ public class SQLHelper {
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             
-            if(!enteredUsername.equals("") || !enteredPassword.equals("")) { 
+            if(!enteredUsername.equals("") && !enteredPassword.equals("")) { 
                 String sql="SELECT ID,password,edit_authorisation FROM user where ID=? and password=?";
                 PreparedStatement ps=conn.prepareStatement(sql);
                 

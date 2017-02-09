@@ -1,4 +1,9 @@
+package screen;
 
+
+import screen.user.UserMenu;
+import screen.admin.AdminMenu;
+import db.SQLHelper;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -15,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Christopher
  */
-public class bookingScreen extends javax.swing.JFrame {
+public class NewBooking extends javax.swing.JFrame {
 
     SQLHelper connection;
     ResultSet rs;
@@ -33,7 +38,7 @@ public class bookingScreen extends javax.swing.JFrame {
      *
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public bookingScreen(String ID, String author) throws SQLException {
+    public NewBooking(String ID, String author) throws SQLException {
 
         connection = new SQLHelper();  
         // access the database
@@ -250,7 +255,7 @@ public class bookingScreen extends javax.swing.JFrame {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -262,15 +267,15 @@ public class bookingScreen extends javax.swing.JFrame {
 
         if (authorisation.equals("a")) {
             try {
-                new mainMenuAdmin(userID).setVisible(true);
+                new AdminMenu(userID).setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NewBooking.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {
-                new mainMenu(userID).setVisible(true);
+                new UserMenu(userID).setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NewBooking.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -287,7 +292,7 @@ public class bookingScreen extends javax.swing.JFrame {
             formater.format(datePicker.getDate());
             System.out.println(formater.format(datePicker.getDate()));
         } else {
-            JOptionPane.showMessageDialog(bookingScreen.this, "Enter a date");
+            JOptionPane.showMessageDialog(NewBooking.this, "Enter a date");
         }
 
     }//GEN-LAST:event_btnBookActionPerformed

@@ -1,8 +1,11 @@
+package screen;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import db.SQLHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -13,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Christopher
  */
-public class loginScreen extends javax.swing.JFrame {
+public class LoginScreen extends javax.swing.JFrame {
 
     SQLHelper db;
             
@@ -21,7 +24,7 @@ public class loginScreen extends javax.swing.JFrame {
      * Creates new form admin 
      * @throws java.sql.SQLException will identify an SQL error if/when one occurs
      */
-    public loginScreen() throws SQLException {
+    public LoginScreen() throws SQLException {
 
         initComponents();
         db = new SQLHelper(); 
@@ -140,18 +143,18 @@ public class loginScreen extends javax.swing.JFrame {
 //                        }
 //                    }
 //                } catch (SQLException ex) {
-//                    Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//                    Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
 //                }
 //            }
 //        } catch (SQLException ex) {
-//            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //
 //        if (!boolID) {
 //            try {
 //                rs.next();
 //            } catch (SQLException ex) {
-//                Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //        }
 //
@@ -175,16 +178,16 @@ public class loginScreen extends javax.swing.JFrame {
 //
 //            } else {
 //                
-//                JOptionPane.showMessageDialog(loginScreen.this, "Password incorrect");
+//                JOptionPane.showMessageDialog(LoginScreen.this, "Password incorrect");
 //
 //                db.closeConnection();
 //
-//                new loginScreen().setVisible(true);
+//                new LoginScreen().setVisible(true);
 //                this.dispose();
 //                
 //            }
 //        } catch (SQLException ex) {
-//            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
 
@@ -194,9 +197,9 @@ public class loginScreen extends javax.swing.JFrame {
         
         this.dispose();
         try {   
-            new newUser().setVisible(true);
+            new NewUser().setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnNewUserActionPerformed
@@ -226,14 +229,15 @@ public class loginScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -241,9 +245,9 @@ public class loginScreen extends javax.swing.JFrame {
             public void run() {
 
                 try {
-                    new loginScreen().setVisible(true);
+                    new LoginScreen().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(loginScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
