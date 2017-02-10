@@ -190,47 +190,64 @@ public class SQLHelper {
     }
     
     /**
-     * takes a user ID, converting it to a SQL string format, which is then used
-     * in a query to ensure that it is unique
+     * Checks if username is unique
      * 
-     * @param ID holds the unique ID of the user
-     * @return returns if the ID is unique
-     * @throws SQLException will identify an SQL error if/when one occurs
+     * @param enteredUsername holds the unique username of the user
+     * @return returns true if username is unique
      */
-    public boolean validateUser(String ID){
-        
+    public boolean usernameUnique(String enteredUsername) {
+
         try {
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+
+            String sql = "SELECT * FROM user where ID = ?";
             
-            ID = "\"" + ID + "\"";
-        
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM user where id = " + ID;
-            rs = stmt.executeQuery(SQL);
-        
-        int count = 0;
-        
-        while (rs.next()){
-            
-            count +=1;
-            
-        }
-        
-        if (count == 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-        } catch (SQLException e){
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,enteredUsername);
+
+            rs = ps.executeQuery();
+
+            return !rs.next();
+
+        } catch (SQLException e) {
 
         } finally {
             closeQuietly(conn, stmt, rs);
         }
-        //TODO: Fix me
         return false;
     }
    
+    public void addNewUserToDB(String[] userData) throws SQLException{
+        //userData values
+        //pos 0 = First Name
+        //pos 1 = Last Name
+        //pos 2 = Username (unique)
+        //pos 3 = Password
+        //pos 4 = Authorisation Level
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+
+            String query = "INSERT into user (ID, first_name, second_name, password, edit_authorisation)" 
+                    + " values (?, ?, ?, ?, ?)"; 
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString (1, userData[0]);
+            ps.setString (2, userData[1]);
+            ps.setString (3, userData[2]);
+            ps.setString (4, userData[3]);
+            ps.setString (5, userData[4]); 
+
+            ps.execute();
+
+        } catch (SQLException e) {
+
+        } finally {
+            closeQuietly(conn, stmt, rs);
+        }
+    }
+    
     /**
      *  Gets the current resultset stored on the class
      * 

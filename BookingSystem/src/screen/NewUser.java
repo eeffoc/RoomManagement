@@ -15,41 +15,17 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author Christopher
+ * @author Christopher, Markus
  */
 public class NewUser extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewUser
-     */
-    SQLHelper connection;
+    SQLHelper db;
 
-    /**
-     * creates a new database connection and loads the form
-     *
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
     public NewUser() throws SQLException {
 
-        connection = new SQLHelper();
+        db = new SQLHelper();
 
         initComponents();
-
-        DoConnect();
-    }
-
-    /**
-     * Makes all data in the text box empty
-     * 
-     * @throws SQLException will identify an SQL error if/when one occurs
-     */
-    public void DoConnect() throws SQLException {
-
-        textID.setText("");
-        textFirstName.setText("");
-        textLastName.setText("");
-        //This will access the table       
-
     }
 
     /**
@@ -65,12 +41,14 @@ public class NewUser extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
         textFirstName = new javax.swing.JTextField();
-        textID = new javax.swing.JTextField();
+        textUsername = new javax.swing.JTextField();
         textLastName = new javax.swing.JTextField();
         jPassword = new javax.swing.JPasswordField();
-        lblPassword1 = new javax.swing.JLabel();
-        lblPassword2 = new javax.swing.JLabel();
-        lblPassword3 = new javax.swing.JLabel();
+        lblFName = new javax.swing.JLabel();
+        lblLName = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
+        lblRetypePassword = new javax.swing.JLabel();
+        jRetypePassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,74 +74,86 @@ public class NewUser extends javax.swing.JFrame {
             }
         });
 
-        textID.addActionListener(new java.awt.event.ActionListener() {
+        textUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIDActionPerformed(evt);
+                textUsernameActionPerformed(evt);
             }
         });
 
-        lblPassword1.setText("First name");
+        lblFName.setText("First name");
 
-        lblPassword2.setText("Last name");
+        lblLName.setText("Last name");
 
-        lblPassword3.setText("ID");
+        lblUsername.setText("Username");
+
+        lblRetypePassword.setText("Retype Password");
+
+        jRetypePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRetypePasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancel))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPassword1)
-                            .addComponent(lblPassword))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblRetypePassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFName)
+                                    .addComponent(lblUsername)
+                                    .addComponent(lblPassword))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRetypePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(lblPassword2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textLastName))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblLName)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(lblPassword3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword1)
-                    .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(textUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsername))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFName)
+                        .addComponent(lblLName)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jRetypePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRetypePassword))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel)
+                    .addComponent(btnSave))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -173,9 +163,9 @@ public class NewUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFirstNameActionPerformed
 
-    private void textIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDActionPerformed
+    private void textUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIDActionPerformed
+    }//GEN-LAST:event_textUsernameActionPerformed
 
     /**
      * Will take the deta from the form and save it to the database as a new user 
@@ -183,54 +173,38 @@ public class NewUser extends javax.swing.JFrame {
      * @param evt waits  for button click
      */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
 
-        String first = textFirstName.getText();
-        String last = textLastName.getText();
-        String ID = textID.getText();
-        String password = jPassword.getText();
-
-        try {
-            connection.getUsers();
-        } catch (SQLException ex) {
-            Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String firstName = textFirstName.getText();
+        String lastName = textLastName.getText();
+        String username = textUsername.getText();
+        String password = String.valueOf(jPassword.getPassword());
+        String passwordRetyped = String.valueOf(jRetypePassword.getPassword());
+        String authorisationLevel = "u";
         
-        ResultSet rs = connection.getRS();
+        //Please God forgive me for handling password as plain text
+        //This isn't my choice but how the db is currently set up
+        //TODO: Fix me ASAP
 
-            if (connection.validateUser(ID)) {
-
-                try {
-
-                    rs.moveToInsertRow();
-
-                    rs.updateString("ID", ID);
-                    rs.updateString("first_name", first);
-                    rs.updateString("second_name", last);
-                    rs.updateString("password", password);
-                    rs.updateString("edit_authorisation", "u");
-                    rs.insertRow();
-
-                    JOptionPane.showMessageDialog(this, ("Record Saved \n\n  ID: " + ID + "\n Password: " + password));
-
-                    connection.closeConnection();
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            if(db.usernameUnique(username)){
+                if(password.equals(passwordRetyped)){
+                    String[] newUserData = {firstName, lastName, username, 
+                        password, authorisationLevel};
+                    db.addNewUserToDB(newUserData);
+                    //Right now we only assume the account was created
+                    //TODO: Add return statement if we are sure the account was created
+                    JOptionPane.showMessageDialog(this, "Account Created!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Password does not match!");
+                    jPassword.setText("");
+                    jRetypePassword.setText("");
                 }
-
-                this.dispose();
-
-                try {
-                    new LoginScreen().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } else {
+            JOptionPane.showMessageDialog(this, "Username is already taken!");
             }
-            else{
-                JOptionPane.showMessageDialog(this, ("Username invalid \n\n  ID: " + ID + " is already an ID"));
-
-           }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(this, "Error connecting to the database, account was not created!");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     
@@ -252,16 +226,22 @@ public class NewUser extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void jRetypePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRetypePasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRetypePasswordActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JPasswordField jPassword;
+    private javax.swing.JPasswordField jRetypePassword;
+    private javax.swing.JLabel lblFName;
+    private javax.swing.JLabel lblLName;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblPassword1;
-    private javax.swing.JLabel lblPassword2;
-    private javax.swing.JLabel lblPassword3;
+    private javax.swing.JLabel lblRetypePassword;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField textFirstName;
-    private javax.swing.JTextField textID;
     private javax.swing.JTextField textLastName;
+    private javax.swing.JTextField textUsername;
     // End of variables declaration//GEN-END:variables
 }

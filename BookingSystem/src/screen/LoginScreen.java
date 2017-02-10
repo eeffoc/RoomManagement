@@ -16,7 +16,7 @@ import screen.user.UserMenu;
 
 /**
  *
- * @author Christopher
+ * @author Christopher, Markus
  */
 public class LoginScreen extends javax.swing.JFrame {
 
