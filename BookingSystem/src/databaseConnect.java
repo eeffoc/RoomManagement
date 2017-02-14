@@ -82,6 +82,14 @@ public class databaseConnect {
             rs = stmt.executeQuery(SQL);
     }
     
+    public void getSpecificBooking(int bookID) throws SQLException{
+        
+        stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        String SQL = "SELECT * FROM booking where ID = " + bookID;
+        rs = stmt.executeQuery(SQL);
+
+    }
+    
    /**
     * Will select all bookings from table booking, and store this as a resultset
     * 

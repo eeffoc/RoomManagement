@@ -29,7 +29,7 @@ public class myBookings extends javax.swing.JFrame {
     int curRow = 0;
     String ID;
     String author;
-
+        
     /**
      *
      * @param userID temporarily holds user ID until moved to a global variable
@@ -63,6 +63,7 @@ public class myBookings extends javax.swing.JFrame {
         
         while (rs.next()){
             getRecordDetails();
+            curRow = rs.getInt("ID");
         }
     }
 
@@ -387,7 +388,11 @@ public class myBookings extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
         try {
-
+           
+            connection.getSpecificBooking(curRow);
+            rs = connection.getRS();
+            rs.first();
+            
             rs.deleteRow();     //Delete the current row
 
             //Close the database
