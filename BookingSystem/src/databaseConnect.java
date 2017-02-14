@@ -106,7 +106,7 @@ public class databaseConnect {
         ID = "\"" + ID + "\"";
         
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String SQL = "SELECT * FROM booking WHERE date >= CURDATE() and userID = " + ID;
+        String SQL = "SELECT * FROM booking join room on booking.roomID = room.id WHERE date >= CURDATE() and userID = " + ID;
         
         rs = stmt.executeQuery(SQL);
         
