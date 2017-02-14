@@ -58,21 +58,17 @@ public class databaseConnect {
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
-    public void searchBookings(int capacity, boolean projector, String time) throws SQLException{
+    public void searchBookings(int capacity, boolean projector, String time, String date) throws SQLException{
     
         boolean boolProjector = projector;
         int roomCap = capacity;
-        String bookingDate = "";
-        String bookTime = "\"" + time + ":00\"";
-      
-        
-        System.out.println(bookTime);
-        
+        String bookTime = "\"" + time + "\"";
+        String bookDate =  "\"" + date + "\"";
         
         
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL;
-            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = " + boolProjector + " AND room.capacity <= " + roomCap + " AND (booking.date <> \"2016-11-16\" AND booking.time <> " + bookTime + "))");
+            SQL = String.format("SELECT * FROM room JOIN booking ON booking.roomID = room.id WHERE (room.projector = " + boolProjector + " AND room.capacity >= " + roomCap + " AND (booking.date <> " + bookDate + " AND booking.time <> " + bookTime + "))");
             //Need way to check if room us taken at time
 
             /*

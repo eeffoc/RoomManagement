@@ -1,11 +1,8 @@
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +17,12 @@ public class bookingScreen extends javax.swing.JFrame {
     ResultSet rs;
     String userID;
     String authorisation;
-
+    DefaultTableModel model;
+    int capacity = 0;
+    boolean projector = false;
+    String bookingTime = "";
+    String date = "";
+    
     /**
      * Creates new form bookingScreen, which will create a new database connection
      * and will load the components of the form
@@ -221,25 +223,20 @@ public class bookingScreen extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        //fix
-        DefaultTableModel model = (DefaultTableModel) roomsAvailable.getModel();
+        model = (DefaultTableModel) roomsAvailable.getModel();
 
         model.setRowCount(0);
 
-        int capacity = (int) spnCapacity.getValue();
-        boolean projector = checkProjector.isSelected();
+        capacity = (int) spnCapacity.getValue();
+        projector = checkProjector.isSelected();
 
-        String bookingTime = cmbTime.getSelectedItem().toString();
-
-        System.out.println("hf");
+        bookingTime = cmbTime.getSelectedItem().toString() + ":00";
         
-        SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-        String date = formater.format(datePicker.getDate());
-        System.out.println(date);
-        
-        
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        date = formater.format(datePicker.getDate());
+                
         try {
-            connection.searchBookings(capacity, projector, bookingTime);
+            connection.searchBookings(capacity, projector, bookingTime, date);
             rs = connection.getRS();
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -294,9 +291,33 @@ public class bookingScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_datePickerActionPerformed
 
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
-        
-        
 
+        try {
+            connection.getAllBookings();
+            rs = connection.getRS();
+        } catch (SQLException ex) {
+            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int row = roomsAvailable.convertRowIndexToModel(roomsAvailable.getSelectedRow());
+        int roomID = (int) roomsAvailable.getValueAt(row, 0);
+        
+        try {
+            rs.moveToInsertRow();
+            rs.updateInt("roomID", roomID);
+            rs.updateString("userID", userID);
+            rs.updateString("date", date);
+            rs.updateString("time", bookingTime);
+            rs.insertRow();
+            
+            JOptionPane.showMessageDialog(bookingScreen.this, "Booking placed");
+            this.dispose();
+            new bookingScreen(userID, authorisation).setVisible(true);            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnBookActionPerformed
 
 
