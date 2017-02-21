@@ -96,6 +96,7 @@ public class myBookings extends javax.swing.JFrame {
         textType = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Booking system");
 
         btnPrevious.setText("Previous");
         btnPrevious.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +126,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
-        spnCap.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        spnCap.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         spnCap.setEnabled(false);
 
         lblProjector.setText("Projector");

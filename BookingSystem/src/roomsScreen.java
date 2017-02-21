@@ -138,6 +138,7 @@ public final class roomsScreen extends javax.swing.JFrame {
         jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Booking system");
 
         textID.setEnabled(false);
         textID.addActionListener(new java.awt.event.ActionListener() {

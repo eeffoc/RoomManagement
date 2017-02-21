@@ -56,6 +56,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
         btnEditRooms = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Booking system");
 
         btnUserScreen.setText("View users");
         btnUserScreen.addActionListener(new java.awt.event.ActionListener() {

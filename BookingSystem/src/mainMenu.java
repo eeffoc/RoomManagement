@@ -53,6 +53,7 @@ public class mainMenu extends javax.swing.JFrame {
         btnUserScreen2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Booking system");
 
         btnUserScreen.setText("My details");
         btnUserScreen.addActionListener(new java.awt.event.ActionListener() {

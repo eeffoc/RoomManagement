@@ -72,6 +72,7 @@ public class newUser extends javax.swing.JFrame {
         lblPassword3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Booking system");
 
         btnSave.setText("Save new record");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
