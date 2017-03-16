@@ -66,7 +66,7 @@ public class loginScreen extends javax.swing.JFrame {
             }
         });
         jPanel11.add(btnNewUser);
-        btnNewUser.setBounds(190, 310, 150, 40);
+        btnNewUser.setBounds(190, 360, 150, 40);
 
         btnLogIn.setBackground(new java.awt.Color(0, 102, 204));
         btnLogIn.setText("Login");
@@ -76,7 +76,7 @@ public class loginScreen extends javax.swing.JFrame {
             }
         });
         jPanel11.add(btnLogIn);
-        btnLogIn.setBounds(20, 310, 150, 40);
+        btnLogIn.setBounds(20, 360, 150, 40);
 
         textPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,11 +84,11 @@ public class loginScreen extends javax.swing.JFrame {
             }
         });
         jPanel11.add(textPassword);
-        textPassword.setBounds(110, 210, 160, 30);
+        textPassword.setBounds(120, 260, 160, 30);
 
         jLabel2.setText("Password:");
         jPanel11.add(jLabel2);
-        jLabel2.setBounds(40, 210, 80, 40);
+        jLabel2.setBounds(50, 260, 80, 40);
 
         userName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,19 +96,19 @@ public class loginScreen extends javax.swing.JFrame {
             }
         });
         jPanel11.add(userName);
-        userName.setBounds(110, 170, 160, 30);
+        userName.setBounds(120, 220, 160, 30);
 
         jLabel1.setText("User ID:");
         jPanel11.add(jLabel1);
-        jLabel1.setBounds(50, 160, 50, 50);
+        jLabel1.setBounds(60, 210, 50, 50);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Logo.PNG"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/logo (2).png"))); // NOI18N
         jPanel11.add(jLabel4);
-        jLabel4.setBounds(40, 10, 210, 140);
+        jLabel4.setBounds(90, 20, 200, 160);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/720x1280-samsung-lg-nokia-wallpapers-mobile-21523leol.jpg"))); // NOI18N
         jPanel11.add(jLabel3);
-        jLabel3.setBounds(0, 0, 360, 390);
+        jLabel3.setBounds(0, 0, 360, 450);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +118,7 @@ public class loginScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         pack();
