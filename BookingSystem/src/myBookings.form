@@ -77,6 +77,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnPrevious">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Previous"/>
       </Properties>
       <Events>
@@ -85,6 +88,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnFirst">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="First"/>
       </Properties>
       <Events>
@@ -93,6 +99,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnNext">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Next"/>
       </Properties>
       <Events>
@@ -101,6 +110,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLast">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Last"/>
       </Properties>
       <Events>
@@ -109,6 +121,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="back">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Back to menu"/>
       </Properties>
       <Events>
@@ -117,6 +132,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDelete">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
       <Events>
@@ -150,15 +168,11 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="spnCap" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <Component id="roomID" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="355" pref="355" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="spnCap" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
+                              <Component id="roomID" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
                               <Component id="textType" min="-2" pref="203" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>

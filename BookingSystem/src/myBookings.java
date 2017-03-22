@@ -99,6 +99,7 @@ public class myBookings extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking system");
 
+        btnPrevious.setBackground(new java.awt.Color(0, 102, 255));
         btnPrevious.setText("Previous");
         btnPrevious.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +107,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
+        btnFirst.setBackground(new java.awt.Color(0, 102, 255));
         btnFirst.setText("First");
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +115,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
+        btnNext.setBackground(new java.awt.Color(0, 102, 255));
         btnNext.setText("Next");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +123,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
+        btnLast.setBackground(new java.awt.Color(0, 102, 255));
         btnLast.setText("Last");
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +131,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
+        back.setBackground(new java.awt.Color(0, 102, 255));
         back.setText("Back to menu");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +139,7 @@ public class myBookings extends javax.swing.JFrame {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(0, 102, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,12 +208,10 @@ public class myBookings extends javax.swing.JFrame {
                             .addComponent(lblType, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(roomID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(355, 355, 355))
-                            .addComponent(textType, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(spnCap, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roomID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textType, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(203, 203, 203))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

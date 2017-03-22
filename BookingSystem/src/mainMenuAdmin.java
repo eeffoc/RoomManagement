@@ -59,6 +59,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking system");
 
+        btnLogOut.setBackground(new java.awt.Color(0, 102, 255));
         btnLogOut.setText("Log out");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +69,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Main menu", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
+        btnUserScreen.setBackground(new java.awt.Color(0, 102, 255));
         btnUserScreen.setText("View users");
         btnUserScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +77,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnRoomScreen.setBackground(new java.awt.Color(0, 102, 255));
         btnRoomScreen.setText("Make booking");
         btnRoomScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +85,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnEditRooms.setBackground(new java.awt.Color(0, 102, 255));
         btnEditRooms.setText("Edit Rooms");
         btnEditRooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +93,7 @@ public class mainMenuAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnUserScreen1.setBackground(new java.awt.Color(0, 102, 255));
         btnUserScreen1.setText("My bookings");
         btnUserScreen1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

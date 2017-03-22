@@ -105,6 +105,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnFirst">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="First"/>
       </Properties>
       <Events>
@@ -113,6 +116,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnNext">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Next"/>
       </Properties>
       <Events>
@@ -121,6 +127,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLast">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Last"/>
       </Properties>
       <Events>
@@ -129,6 +138,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPrevious">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Previous"/>
       </Properties>
       <Events>
@@ -137,6 +149,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnUpdateRecord">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
       <Events>
@@ -145,6 +160,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDeleteRecord">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
       <Events>
@@ -153,6 +171,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnNewRecord">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="New Record"/>
       </Properties>
       <Events>
@@ -161,6 +182,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSaveRecord">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Save new record"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -170,6 +194,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelRecord">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancel new record"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -179,6 +206,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="back">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Back to menu"/>
       </Properties>
       <Events>

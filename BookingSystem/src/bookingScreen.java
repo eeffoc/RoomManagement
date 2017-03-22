@@ -152,6 +152,7 @@ public class bookingScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking system");
 
+        btnBook.setBackground(new java.awt.Color(0, 102, 255));
         btnBook.setText("Book");
         btnBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +160,7 @@ public class bookingScreen extends javax.swing.JFrame {
             }
         });
 
+        btnLoginScreen.setBackground(new java.awt.Color(0, 102, 255));
         btnLoginScreen.setText("Back to menu");
         btnLoginScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,6 +220,7 @@ public class bookingScreen extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(roomsAvailable);
 
+        btnSearch.setBackground(new java.awt.Color(0, 102, 255));
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,41 +441,17 @@ public class bookingScreen extends javax.swing.JFrame {
     private javax.swing.JLabel dateLabel1;
     private javax.swing.JLabel dateLabel2;
     private org.jdesktop.swingx.JXDatePicker datePicker;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPassword;
-    private javax.swing.JPasswordField jPassword1;
-    private javax.swing.JPasswordField jPassword2;
     private javax.swing.JPasswordField jPassword3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblPassword1;
-    private javax.swing.JLabel lblPassword2;
-    private javax.swing.JLabel lblPassword3;
-    private javax.swing.JLabel lblPassword4;
-    private javax.swing.JLabel lblPassword5;
     private javax.swing.JLabel lblPassword6;
     private javax.swing.JLabel lblPassword7;
     private javax.swing.JTable roomsAvailable;
     private javax.swing.JSpinner spnCapacity;
-    private javax.swing.JTextField textAuthorisation;
-    private javax.swing.JTextField textAuthorisation1;
-    private javax.swing.JTextField textAuthorisation2;
     private javax.swing.JTextField textAuthorisation3;
-    private javax.swing.JTextField textFirstName;
-    private javax.swing.JTextField textFirstName1;
-    private javax.swing.JTextField textFirstName2;
     private javax.swing.JTextField textFirstName3;
-    private javax.swing.JTextField textID;
-    private javax.swing.JTextField textID1;
-    private javax.swing.JTextField textID2;
     private javax.swing.JTextField textID3;
-    private javax.swing.JTextField textLastName;
-    private javax.swing.JTextField textLastName1;
-    private javax.swing.JTextField textLastName2;
     private javax.swing.JTextField textLastName3;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables

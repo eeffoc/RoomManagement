@@ -75,6 +75,7 @@ public class newUser extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking system");
 
+        btnSave.setBackground(new java.awt.Color(0, 102, 255));
         btnSave.setText("Save new record");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +83,7 @@ public class newUser extends javax.swing.JFrame {
             }
         });
 
+        btnCancel.setBackground(new java.awt.Color(0, 102, 255));
         btnCancel.setText("Cancel new record");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -54,6 +54,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnLogOut">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Log out"/>
       </Properties>
       <Events>
@@ -113,6 +116,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnUserScreen">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="View users"/>
           </Properties>
           <Events>
@@ -121,6 +127,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnRoomScreen">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Make booking"/>
           </Properties>
           <Events>
@@ -129,6 +138,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnEditRooms">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Edit Rooms"/>
           </Properties>
           <Events>
@@ -137,6 +149,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnUserScreen1">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="My bookings"/>
           </Properties>
           <Events>

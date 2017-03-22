@@ -133,6 +133,7 @@ public final class adminScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking system");
 
+        btnFirst.setBackground(new java.awt.Color(0, 102, 255));
         btnFirst.setText("First");
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +141,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnNext.setBackground(new java.awt.Color(0, 102, 255));
         btnNext.setText("Next");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +149,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnLast.setBackground(new java.awt.Color(0, 102, 255));
         btnLast.setText("Last");
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +157,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnPrevious.setBackground(new java.awt.Color(0, 102, 255));
         btnPrevious.setText("Previous");
         btnPrevious.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +165,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnUpdateRecord.setBackground(new java.awt.Color(0, 102, 255));
         btnUpdateRecord.setText("Update");
         btnUpdateRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +173,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnDeleteRecord.setBackground(new java.awt.Color(0, 102, 255));
         btnDeleteRecord.setText("Delete");
         btnDeleteRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +181,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnNewRecord.setBackground(new java.awt.Color(0, 102, 255));
         btnNewRecord.setText("New Record");
         btnNewRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +189,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnSaveRecord.setBackground(new java.awt.Color(0, 102, 255));
         btnSaveRecord.setText("Save new record");
         btnSaveRecord.setEnabled(false);
         btnSaveRecord.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +198,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        btnCancelRecord.setBackground(new java.awt.Color(0, 102, 255));
         btnCancelRecord.setText("Cancel new record");
         btnCancelRecord.setEnabled(false);
         btnCancelRecord.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +207,7 @@ public final class adminScreen extends javax.swing.JFrame {
             }
         });
 
+        back.setBackground(new java.awt.Color(0, 102, 255));
         back.setText("Back to menu");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
