@@ -29,11 +29,15 @@ public class databaseConnect {
             
         
         host = "jdbc:mysql://213.104.129.95:3306/roomBooking";
-        //213.104.129.95/
-        uName = "root";
-        //guest
-        uPass = "root";
-        //NurfThis
+        //192.168.0.35/
+        //213.104.129.95:3306
+        uName = "TLL";
+        //pi
+        //root
+        uPass = "triggered";
+        //raspberry
+        //AppleBees1121@@@
+        
         con = DriverManager.getConnection(host, uName, uPass);
     }
 
