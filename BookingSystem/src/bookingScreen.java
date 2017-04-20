@@ -7,7 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * The screen for searching and making bookings with rooms on the database
+ * An interface class for the system, this class contains searching and making
+ * bookings with rooms on the database.
  *
  * @author Christopher
  */

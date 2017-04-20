@@ -20,8 +20,8 @@ public class databaseConnect {
     ResultSet rs;
 
     /**
-     * This class will handle all the database SQL queries between the database and the system,
-     * holding how to connect onto the database
+     * This class will handle all the database SQL queries between the database
+     * and the system, holding how to connect onto the database
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
@@ -60,6 +60,10 @@ public class databaseConnect {
     /**
      * gets all bookings which match the entered fields into the bookings form
      * 
+     * @param capacity minimum room size
+     * @param projector is a projector required
+     * @param time time room is needed
+     * @param date date room is needed
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public void searchBookings(int capacity, boolean projector, String time, String date) throws SQLException{
@@ -86,6 +90,11 @@ public class databaseConnect {
             rs = stmt.executeQuery(SQL);
     }
     
+    /**
+     *
+     * @param bookID holds bookingID which is current being searched for
+     * @throws SQLException will identify an SQL error if/when one occurs
+     */
     public void getSpecificBooking(int bookID) throws SQLException{
         
         stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);

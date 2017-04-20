@@ -1,21 +1,15 @@
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
+ * An interface class for the system, this class contains the booking screen for
+ * the system, so that the system will search for rooms and allow the user to 
+ * book a room.
+ * 
  * @author Christopher
  */
 public class myBookings extends javax.swing.JFrame {

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -10,7 +6,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * An interface class for the system, this class contains logging into the system
+ * and also navigating to create a new user.
+ * 
  * @author Christopher
  */
 public class loginScreen extends javax.swing.JFrame {

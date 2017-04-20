@@ -5,8 +5,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * The class will create an interface for the user to see rooms on the system
- *
+ * An interface class for the system, this class contains the view for all rooms
+ * which are on the database, allowing edit add and view controls to the viewer.
+ * 
  * @author Christopher
  */
 public final class roomsScreen extends javax.swing.JFrame {

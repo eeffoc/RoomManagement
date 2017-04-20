@@ -5,10 +5,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * An interface class for the system, this class contains how users and admin
+ * can view user details on the system, and how they will also edit various
+ * details.
  *
  * @author Christopher
- *
- *
  */
 public class userScreen extends javax.swing.JFrame {
     

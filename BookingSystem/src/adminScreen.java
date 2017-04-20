@@ -5,9 +5,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * In this interface, the admin can view all users on the system and edit their
- * details if it is required while also being able to add new users on the
- * system.
+ * An interface class for the system, the admin can view all users on the system
+ * and edit their details if it is required while also being able to add new users
+ * on the system.
  *
  * @author Christopher
  */
