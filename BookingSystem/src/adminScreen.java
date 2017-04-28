@@ -3,7 +3,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+ 
 /**
  * An interface class for the system, the admin can view all users on the system
  * and edit their details if it is required while also being able to add new users
