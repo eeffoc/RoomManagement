@@ -21,8 +21,8 @@ public final class adminScreen extends javax.swing.JFrame {
     String userID;     
     
     /**
-     *`creates a new database a connection, which will get all users on the system, 
-     * and will load up the components of the form.
+     *`creates a new database connection, which gets all users on the system, 
+     * and load up the components of the form.
      * 
      * @param tempID stores the current user ID, to be saved to the class
      * @throws SQLException will identify an SQL error if/when one occurs
@@ -68,18 +68,18 @@ public final class adminScreen extends javax.swing.JFrame {
                 String last_name = rs.getString("second_name");
                 String setAuthorisation = rs.getString("edit_authorisation");
 
+                // Puts all user details into interface text boxes
                 textID.setText(id);
                 textFirstName.setText(first_name);
                 textLastName.setText(last_name);
                 textAuthorisation.setText(setAuthorisation);
-                // Put all user details to interface text boxes
 
             }
         }
     }
 
     /**
-     * Will get the user details, and add them to the on screen boxes
+     * Will get the user details, and add them to the onscreen boxes
      *
      * @throws SQLException
      */
@@ -364,7 +364,7 @@ public final class adminScreen extends javax.swing.JFrame {
 
             rs.first();     // Go to the first record in recordset 
 
-            getRecordDetails();
+            getRecordDetails();  // Gets user details
 
         } catch (SQLException err) {        //Catch any SQL errors, and keep the system running
 
@@ -524,6 +524,7 @@ public final class adminScreen extends javax.swing.JFrame {
             btnDeleteRecord.setEnabled(true);
             btnNewRecord.setEnabled(true);
 
+            // Cancels saved record
             btnSaveRecord.setEnabled(false);
             btnCancelRecord.setEnabled(false);
 
@@ -558,9 +559,9 @@ public final class adminScreen extends javax.swing.JFrame {
         try {
 
             curRow = rs.getRow();       //Set the current row to the row moved to
-            textFirstName.setText("");      //Set the text of
-            textLastName.setText("");
-            textAuthorisation.setText("");
+            textFirstName.setText("");      //Set the text of first name
+            textLastName.setText("");       //Set the text of last name
+            textAuthorisation.setText("");  //Authorises text inputed
         } catch (SQLException ex) {
             Logger.getLogger(adminScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
