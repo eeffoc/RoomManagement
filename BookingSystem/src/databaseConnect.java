@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 
 /**
  * 
+ * 
  * @author Christopher
  */
 public class databaseConnect {
@@ -104,7 +105,7 @@ public class databaseConnect {
     }
     
    /**
-    * Will select all bookings from table booking, and store this as a resultset
+    * Will select all bookings from table booking, and store this as a result set
     * 
     * @throws SQLException will identify an SQL error if/when one occurs
     */
@@ -116,7 +117,7 @@ public class databaseConnect {
     }
     
     /**
-     * Gets all the bookings past todays date, where user ID = current user, and 
+     * Gets all the bookings  todays date, where user ID = current user, and 
      * stores this as a result set
      * 
      * @param ID takes ID for the SQL statement
@@ -134,7 +135,7 @@ public class databaseConnect {
     }
     
     /**
-     * Gets all users from the user table and stores this as a result set
+     * Gets all users from the user table and stores this as a resultset
      * 
      * @throws SQLException will identify an SQL error if/when one occurs
      */
