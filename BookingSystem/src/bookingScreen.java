@@ -23,10 +23,10 @@ public class bookingScreen extends javax.swing.JFrame {
     boolean projector = false;
     String bookingTime = "";
     String date = "";
-    
+
     /**
-     * Creates new form bookingScreen, which will create a new database connection
-     * and will load the components of the form
+     * Creates new form bookingScreen, which will create a new database
+     * connection and will load the components of the form
      *
      * @param ID Will hold the user ID temporarily until stored on the global
      * variable
@@ -36,13 +36,12 @@ public class bookingScreen extends javax.swing.JFrame {
      * @throws SQLException will identify an SQL error if/when one occurs
      */
     public bookingScreen(String ID, String author) throws SQLException {
-        
-        if (connection == null){
-            connection = new databaseConnect(); 
+
+        if (connection == null) {
+            connection = new databaseConnect();
         }
-         
+
         // access the database
-        
         userID = ID;
         authorisation = author;
 
@@ -330,36 +329,41 @@ public class bookingScreen extends javax.swing.JFrame {
         projector = checkProjector.isSelected();
 
         bookingTime = cmbTime.getSelectedItem().toString() + ":00";
-        
-        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-        date = formater.format(datePicker.getDate());
-                
-        try {
-            connection.searchBookings(capacity, projector, bookingTime, date);
-            rs = connection.getRS();
-        } catch (SQLException ex) {
-            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        try {
-            while (rs.next()) {
+        if (datePicker.getDate() != null) {
+            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+            date = formater.format(datePicker.getDate());
 
-                int data1 = rs.getInt("ID");
-                String data2 = rs.getString("type");
-                int data3 = rs.getInt("capacity");
-                int tempdata4 = rs.getInt("projector");
-                boolean data4 = false;
-                if (tempdata4 == 1) {
-                    data4 = true;
-                }
-
-                Object[] row = {data1, data2, data3, data4};
-
-                model.addRow(row);
-
+            try {
+                connection.searchBookings(capacity, projector, bookingTime, date);
+                rs = connection.getRS();
+            } catch (SQLException ex) {
+                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+
+            try {
+                while (rs.next()) {
+
+                    int data1 = rs.getInt("ID");
+                    String data2 = rs.getString("type");
+                    int data3 = rs.getInt("capacity");
+                    int tempdata4 = rs.getInt("projector");
+                    boolean data4 = false;
+                    if (tempdata4 == 1) {
+                        data4 = true;
+                    }
+
+                    Object[] row = {data1, data2, data3, data4};
+
+                    model.addRow(row);
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(bookingScreen.this, "ERROR \n No date entered");
         }
 
 
@@ -397,10 +401,10 @@ public class bookingScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         int row = roomsAvailable.convertRowIndexToModel(roomsAvailable.getSelectedRow());
         int roomID = (int) roomsAvailable.getValueAt(row, 0);
-        
+
         try {
             rs.moveToInsertRow();
             rs.updateInt("roomID", roomID);
@@ -408,15 +412,15 @@ public class bookingScreen extends javax.swing.JFrame {
             rs.updateString("date", date);
             rs.updateString("time", bookingTime);
             rs.insertRow();
-            
+
             JOptionPane.showMessageDialog(bookingScreen.this, "Booking placed");
             this.dispose();
-            new bookingScreen(userID, authorisation).setVisible(true);            
-            
+            new bookingScreen(userID, authorisation).setVisible(true);
+
         } catch (SQLException ex) {
             Logger.getLogger(bookingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btnBookActionPerformed
 
     private void textFirstName3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFirstName3ActionPerformed
